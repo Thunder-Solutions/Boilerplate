@@ -1,0 +1,37 @@
+.checkbox {
+  --size: 3rem;
+  display: inline-block;
+  height: var(--size);
+  width: var(--size);
+  vertical-align: middle;
+  margin: 0;
+  background-color: white;
+  position: relative;
+}
+
+.input {
+  display: none;
+}
+
+.input:checked + .checkbox:before,
+.input:checked + .checkbox:after {
+  --thickness: 0.4em;
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background-color: currentColor;
+}
+
+.input:checked + .checkbox:before {
+  height: 0.6em;
+  width: var(--thickness);
+  transform: translate(-90%, 40%) rotate(-45deg);
+}
+
+.input:checked + .checkbox:after {
+  height: var(--thickness);
+  width: 1.35em;
+  transform: translate(8%, 10%) rotate(-45deg);
+}

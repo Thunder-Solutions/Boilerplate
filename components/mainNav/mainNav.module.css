@@ -1,0 +1,27 @@
+.navContainer {
+  align-items: center;
+  color: var(--color);
+  display: grid;
+  justify-items: center;
+  padding: 0 2rem 0 0;
+  position: relative;
+}
+
+.button {
+  align-items: baseline;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: grid;
+  justify-items: center;
+}
+
+.buttonIcon {
+  font-size: 4rem;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+}

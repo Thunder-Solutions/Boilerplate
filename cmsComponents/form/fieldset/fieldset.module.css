@@ -1,0 +1,14 @@
+.fieldset {
+  border: 0.1rem solid var(--color-site-2-c);
+  padding: 2rem;
+}
+
+.content {
+  display: grid;
+  grid-gap: 2rem;
+}
+
+.legend {
+  font-size: 3rem;
+  padding: 0 1rem;
+}

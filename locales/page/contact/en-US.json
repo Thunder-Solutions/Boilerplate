@@ -1,0 +1,31 @@
+{
+  "pageTitle": "Contact Us",
+  "sectionOneTitle": "Company",
+  "sectionOneContent": "This page should provide some introductory paragraph to explain all the different ways this company is available for open communication.",
+  "company": {
+    "email": "contact@thunder.solutions",
+    "tel": "7245491609",
+    "phone": "(724) 549-1609",
+    "name": "Thunder Solutions",
+    "addressLine1": "740 Edgewater Drive",
+    "addressLine2": "West Mifflin, PA, 15122"
+  },
+  "sectionTwoTitle": "Directory",
+  "sectionTwoContent": "This paragraph should explain that the next section is dedicated to the public company directory.",
+  "directory": [
+    {
+      "title": "CTO",
+      "name": "Jon DeWitt",
+      "tel": "7245491609",
+      "phone": "(724) 549-1609",
+      "email": "jon.dewitt@thunder.solutions"
+    },
+    {
+      "title": "CMO",
+      "name": "Vinnie Volpe",
+      "tel": "1112223333",
+      "phone": "(111) 222-3333",
+      "email": "vinnie.volpe@thunder.solutions"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.label {
+  display: grid;
+  gap: 0.5rem 1rem;
+}
+
+.required {
+  color: var(--color-error-1-c);
+  padding-left: 0.5rem;
+  text-decoration: none;
+}
+
+.inline {
+  align-items: center;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 0.5rem 0;
+}

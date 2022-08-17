@@ -1,0 +1,47 @@
+.dialog {
+  background-color: var(--color-site-1);
+  color: var(--color-site-1-c);
+  padding: 0;
+}
+
+/* NOTES:
+
+- The ::backdrop pseudo selector doesn't have visibility to
+  any color variables on the root. It must be explicitly
+  defined here and cannot be shared, unfortunately.
+
+- The ::backdrop pseudo selector doesn't play nice on Safari,
+  and will cause all other selectors in the list to fail also.
+  That means this cannot be consolidated either, unfortunately.
+
+*/
+.dialog::backdrop { /* native */
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.dialog + .backdrop { /* for the polyfill */
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.header {
+  align-items: center;
+  background-color: var(--color-site-2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+
+.closeButton {
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.body {
+  padding: 2rem;
+  max-height: 50vh;
+  overflow: auto;
+}

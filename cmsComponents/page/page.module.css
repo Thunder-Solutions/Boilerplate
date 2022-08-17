@@ -1,0 +1,23 @@
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 25rem) 1fr;
+  min-height: 100%;
+}
+
+.cmsNavLinkWrapper {
+  padding: 0;
+  width: 100%;
+}
+
+.cmsNavLink {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: left;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.cmsHeader {
+  background-color: var(--color-site-2-1);
+}

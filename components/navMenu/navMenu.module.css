@@ -1,0 +1,65 @@
+.nav {
+  background-color: var(--color-site-2);
+  box-sizing: border-box;
+  display: grid;
+  gap: 0.5rem;
+  grid-auto-rows: min-content;
+  grid-template-columns: minmax(0, 1fr);
+  height: 100%;
+  max-width: 40rem;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transition: visibility 0.5s, max-width 0.5s;
+  width: 75vw;
+  z-index: 1;
+}
+
+.nav:not(.navOpen) {
+  max-width: 0;
+  transition: visibility 0s linear 0.5s, max-width 0.5s;
+  visibility: hidden;
+}
+
+.nav .link {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: inherit;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.nav .link,
+.nav .link:hover,
+.nav .link:active,
+.nav .link:visited {
+  color: var(--color-site-2-c);
+  display: block;
+  padding: 1rem 3rem;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+.nav .link:hover {
+  background-color: var(--color-site-2-c);
+  color: var(--color-site-2);
+}
+
+.nav .linkWithIcon,
+.nav .linkWithIcon:hover,
+.nav .linkWithIcon:active,
+.nav .linkWithIcon:visited {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.nav .toggler {
+  border-bottom: 0.1rem solid;
+}

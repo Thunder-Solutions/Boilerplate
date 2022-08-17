@@ -1,0 +1,28 @@
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  --thickness: 0.5rem;
+  --size: 10rem;
+  animation: spin 1s linear infinite;
+  background-color: var(--color-brand-1);
+  background-image: conic-gradient(transparent, var(--color-brand-2));
+  border: calc(var(--thickness) / 2) solid var(--color-brand-1);
+  border-radius: 50%;
+  height: var(--size);
+  position: relative;
+  width: var(--size);
+}
+
+.spinner:after {
+  content: '';
+  background-color: var(--color-brand-1);
+  border-radius: 50%;
+  height: calc(var(--size) - calc(var(--thickness) * 2));
+  left: var(--thickness);
+  position: absolute;
+  top: var(--thickness);
+  width: calc(var(--size) - calc(var(--thickness) * 2));
+}

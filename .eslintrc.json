@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "curly": "off",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "lines-around-comment": [
+      "error",
+      {
+        "beforeLineComment": true
+      }
+    ],
+    "padded-blocks": "off",
+    "quote-props": [
+      "error",
+      "consistent-as-needed"
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "operator-linebreak": [
+      1,
+      "before"
+    ],
+    "no-unused-vars": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "**/*.spec.js",
+        "**/jest.setup.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}

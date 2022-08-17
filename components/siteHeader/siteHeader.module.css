@@ -1,0 +1,40 @@
+.siteHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: minmax(0, 1fr);
+  height: 12rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  transition: all 0.5s;
+}
+
+.splashHeader {
+  --color: var(--color-site-c);
+  --color-c: var(--color-site-1);
+  position: fixed;
+  width: 100%;
+}
+
+.dkSplash:not(.scrolled) {
+  --color: var(--color-dkimg-1);
+  --color-c: var(--color-dkimg-c);
+}
+
+.ltSplash:not(.scrolled) {
+  --color: var(--color-ltimg-1);
+  --color-c: var(--color-ltimg-c);
+}
+
+.scrolled {
+  background-color: var(--color-site-2);
+  height: 7rem;
+}
+
+.logo {
+  box-sizing: border-box;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  padding: 1.5rem;
+}

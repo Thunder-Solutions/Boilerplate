@@ -1,0 +1,13 @@
+.cardContainer {
+  box-sizing: border-box;
+  padding: 1rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--color-site-2);
+  color: var(--color-site-2-c);
+  box-sizing: border-box;
+  padding: 4rem 6rem;
+}

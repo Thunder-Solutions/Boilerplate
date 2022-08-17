@@ -1,0 +1,21 @@
+.addressCard {
+  display: grid;
+  gap: 6rem;
+  grid-template-columns: auto 1fr;
+}
+
+.icon {
+  align-items: center;
+  border-right: 0.1rem solid;
+  display: grid;
+  font-size: 10rem;
+  padding-right: 4rem;
+}
+
+.address {
+  font-style: normal;
+}
+
+.title {
+  font-size: 2em;
+}

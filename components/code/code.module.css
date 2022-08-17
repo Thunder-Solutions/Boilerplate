@@ -1,0 +1,7 @@
+.inlineCode {
+  background-color: var(--color-site-2);
+  border: 0.1rem solid var(--color-site-2-1);
+  color: var(--color-site-2-c);
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+}

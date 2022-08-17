@@ -1,0 +1,25 @@
+{
+  "name": "Boilerplate Theme",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "boilerplatetheme",
+  "workspaceFolder": "/usr/src/app",
+  "forwardPorts": [
+    3000, // port to use for development on localhost
+    9229, // port for debugging via Node.js
+    9222, // port for debugging via Chrome
+  ],
+  "overrideCommand": true, // basically same as "sleep infinity"
+
+  "remoteEnv": {
+    "VISUAL": "code --wait",
+    "EDITOR": "code --wait",
+  },
+
+  // These extensions will automatically be installed in the container for the VS Code Server to use
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "mhutchie.git-graph",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+  ]
+}

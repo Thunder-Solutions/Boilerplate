@@ -1,0 +1,65 @@
+.splashContainer {
+  position: relative;
+}
+
+.splashContainer.dark {
+  --color: var(--color-dkimg-1);
+  --color-c: var(--color-dkimg-c);
+}
+
+.splashContainer.light {
+  --color: var(--color-ltimg-1);
+  --color-c: var(--color-ltimg-c);
+}
+
+.splash {
+  align-items: center;
+  background-color: black;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  height: 100vh;
+  justify-items: center;
+  padding: 20rem 0;
+}
+
+.splashContent {
+  padding-top: 4rem;
+}
+
+.splashContent * {
+  color: var(--color);
+}
+
+.scrollIndicator {
+  display: grid;
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 8rem;
+  margin: auto;
+  z-index: 0;
+}
+
+.scrollText {
+  background-color: var(--color);
+  box-sizing: border-box;
+  font-size: smaller;
+  padding: 0.2rem 0.5rem 0;
+  color: var(--color-c);
+  position: relative;
+  z-index: -1;
+  box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.5);
+}
+
+.scrollIndicator:after {
+  border: 1.2rem solid transparent;
+  border-left-width: 4rem;
+  border-right-width: 4rem;
+  border-top-color: var(--color);
+  box-sizing: border-box;
+  content: '';
+  display: block;
+}

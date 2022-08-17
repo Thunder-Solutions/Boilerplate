@@ -1,0 +1,22 @@
+.header {
+  padding: 2rem 4rem;
+}
+
+.title,
+.subtitle {
+  margin: 0;
+  text-align: center;
+}
+
+.title {
+  border-bottom: 0.1rem solid;
+  font-size: 6rem;
+  margin: 0 auto;
+  max-width: 75rem;
+  padding-bottom: 1rem;
+}
+
+.subtitle {
+  padding-top: 0.5rem;
+  font-weight: normal;
+}

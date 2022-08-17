@@ -1,0 +1,15 @@
+.component {
+  border-top: 0.3rem solid;
+  border-bottom: 0.3rem solid;
+}
+
+.menu {
+  background-color: var(--color-site-2);
+  border-bottom: 0.3rem solid;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: right;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+}

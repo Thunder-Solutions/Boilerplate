@@ -1,0 +1,41 @@
+.buttonLink {
+  display: block;
+  text-align: center;
+}
+
+.buttonLink,
+.buttonLink:hover,
+.buttonLink:active,
+.buttonLink:visited {
+  color: var(--color-site-2-c);
+  text-decoration: none;
+}
+
+.button {
+  background-color: var(--color-site-2);
+  border: 0.1rem solid var(--color-site-2-1);
+  color: var(--color-site-2-c);
+  cursor: pointer;
+  font: inherit;
+  padding: 1rem;
+  transition: all 0.5s;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--color-site-2-c);
+  color: var(--color-site-2);
+}
+
+.primary {
+  background-color: var(--color-brand-1);
+  border-color: var(--color-brand-2);
+  color: var(--color-brand-1-c);
+}
+
+.button:disabled {
+  background-color: var(--color-disabled-1);
+  border-color: var(--color-disabled-1-c);
+  color: var(--color-disabled-1-c);
+  cursor: not-allowed;
+}

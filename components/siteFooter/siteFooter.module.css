@@ -1,0 +1,29 @@
+.footer {
+  background-color: var(--color-site-2);
+  color: var(--color-site-2-c);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.links {
+  align-items: center;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.social {
+  display: flex;
+  font-size: 3rem;
+  gap: 1rem;
+}
+
+.socialLink {
+  display: grid; /* removes unwanted whitespace */
+}
+
+.socialLink:hover:after {
+  width: 0;
+}

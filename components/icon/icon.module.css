@@ -1,0 +1,7 @@
+.iconOuterWrapper {
+  display: inline-block; /* treat the icon as text by default */
+}
+
+.iconInnerWrapper {
+  display: grid; /* remove unwanted white-space */
+}
