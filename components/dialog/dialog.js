@@ -47,6 +47,9 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
       dialogRef.current.close()
       document.documentElement.style.overflow = 'auto'
     }
+    return () => {
+      document.documentElement.style.overflow = 'auto'
+    }
   }, [open, dialogRef])
 
   return (
