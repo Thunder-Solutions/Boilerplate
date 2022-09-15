@@ -1,3 +1,4 @@
+import { NOOP } from './constants'
 import { useState, useEffect, useRef } from 'react'
 import * as Queries from 'client-api'
 
@@ -119,3 +120,68 @@ export const useScroll = element => {
   }, [])
   return [scrolled, coords, dimensions]
 }
+
+/**
+ * Consolidating the repetitive logic of lazy loaders to one shared function
+ * @param {object} config - The object used to configure the lazy load options
+ * @param {function} config.getCondition - This function's return value will determine whether or not to trigger the loader
+ * @param {function} config.getData - The async function that should resolve to the data being loaded
+ * @param {function} config.onLoad - The callback to run upon loading the data
+ * @param {function} config.subscribe - This callback injects the main load function for use with event listeners or subscribers
+ * @param {function} config.getUnsubscribe - This callback should return a cleanup function that unsubscribes anything set in effect
+ * @returns {boolean} - From the react state hook to indicate whether the data is still loading or not
+ */
+export const useLazyLoad = ({
+  getCondition = () => true,
+  getData = () => null,
+  onLoad = ({ markAsEndOfList }) => markAsEndOfList(),
+  subscribe = NOOP,
+  getUnsubscribe = NOOP,
+}) => {
+  const [endOfList, setEndOfList] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const markAsEndOfList = () => setEndOfList(true)
+  useEffect(() => {
+    const lazyLoad = async () => {
+      const condition = getCondition()
+      if (!condition || endOfList) return
+      setLoading(true)
+      const data = await getData()
+      onLoad({ data, markAsEndOfList })
+      setLoading(false)
+    }
+    subscribe(lazyLoad)
+    return getUnsubscribe(lazyLoad)
+  }, [getData, onLoad, setLoading, subscribe, getUnsubscribe])
+  return loading
+}
+
+/**
+ * Composes the useLazyLoad utility for more specific usage with scrolling
+ * @param {object} config - The object used to configure the lazy load options
+ * @param {function} config.getCondition - This function's return value will determine whether or not to trigger the loader
+ * @param {function} config.getData - The async function that should resolve to the data being loaded
+ * @param {function} config.onLoad - The callback to run upon loading the data
+ * @param {function} config.subscribe - This callback injects the main load function for use with event listeners or subscribers
+ * @param {function} config.getUnsubscribe - This callback should return a cleanup function that unsubscribes anything set in effect
+ * @returns {boolean} - From the react state hook to indicate whether the data is still loading or not
+ */
+export const useLazyLoadScroll = (config = {}) => useLazyLoad({
+  ...config,
+  getCondition: () => {
+    const { scrollY, innerHeight } = window
+    const { scrollHeight } = document.body
+    const bottomOfScreen = scrollY + innerHeight
+    const isBottomOfPage = bottomOfScreen >= (scrollHeight - 400)
+    const defaultCondition = 'getCondition' in config ? config.getCondition() : true
+    return isBottomOfPage && defaultCondition
+  },
+  subscribe: lazyLoad => {
+    window.addEventListener('scroll', lazyLoad)
+    if ('subscribe' in config) config.subscribe(lazyLoad)
+  },
+  getUnsubscribe: lazyLoad => () => {
+    window.removeEventListener('scroll', lazyLoad)
+    if ('getUnsubscribe' in config) config.getUnsubscribe(lazyLoad)()
+  },
+})
