@@ -1,4 +1,4 @@
-import { Head, Page, Link } from 'cmsComponents';
+import { Head, Page, Link } from 'cmsComponents'
 
 const AdminContentPage = () => {
 
@@ -9,7 +9,7 @@ const AdminContentPage = () => {
       <div><Link href="/admin/content/pages">Pages</Link></div>
       <div><Link href="/admin/content/layouts">Layouts</Link></div>
     </Page>
-  );
-};
+  )
+}
 
-export default AdminContentPage;
+export default AdminContentPage

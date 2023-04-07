@@ -1,17 +1,17 @@
-import Button from 'cmsComponents/form/button/button';
-import Icon from 'cmsComponents/icon/icon';
-import css from './page.module.css';
+import Button from 'cmsComponents/form/button/button'
+import Icon from 'cmsComponents/icon/icon'
+import css from './page.module.css'
 
 const NavLink = ({ children, icon, ...props }) => <div>
   <Button.Link {...props} wrapperClass={css.cmsNavLinkWrapper} className={css.cmsNavLink}>
     <Icon type={icon} />
     {children}
   </Button.Link>
-</div>;
+</div>
 
 const Page = ({ children, className = '', ...props }) => {
 
-  const pageClass = `${className} ${css.page}`;
+  const pageClass = `${className} ${css.page}`
 
   return (
     <div {...props} className={pageClass}>
@@ -26,7 +26,7 @@ const Page = ({ children, className = '', ...props }) => {
         {children}
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

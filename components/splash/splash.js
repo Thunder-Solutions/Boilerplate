@@ -1,17 +1,17 @@
-import css from './splash.module.css';
-import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
-import { getClassName } from 'utilities';
-import SplashContext from './splashContext';
-import { useContext } from 'react';
+import css from './splash.module.css'
+import { ParallaxBanner, Parallax } from 'react-scroll-parallax'
+import { getClassName } from 'utilities'
+import SplashContext from './splashContext'
+import { useContext } from 'react'
 
 const Splash = ({ children }) => {
 
-  const image = useContext(SplashContext);
+  const image = useContext(SplashContext)
 
   const splashContainerClass = getClassName({
     [css.dark]: image.characteristic === 'dark',
     [css.light]: image.characteristic === 'light',
-  }, css.splashContainer);
+  }, css.splashContainer)
 
   return (
     <div className={splashContainerClass}>
@@ -21,7 +21,7 @@ const Splash = ({ children }) => {
           {
             image: image.src,
             speed: -45,
-            opacity: [1.5, -0.1],
+            opacity: [1.5, -0.1]
           },
         ]}
         style={{ aspectRatio: '2 / 1' }}
@@ -36,7 +36,7 @@ const Splash = ({ children }) => {
         </span>
       </Parallax>
     </div>
-  );
-};
+  )
+}
 
-export default Splash;
+export default Splash

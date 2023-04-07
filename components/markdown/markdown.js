@@ -1,7 +1,7 @@
-import Link from 'components/link/link';
-import Code from 'components/code/code';
-import ReactMarkdown from 'react-markdown';
-import Title from 'components/title/title';
+import Link from 'components/link/link'
+import Code from 'components/code/code'
+import ReactMarkdown from 'react-markdown'
+import Title from 'components/title/title'
 
 const Markdown = ({ children }) => {
   return <ReactMarkdown components={{
@@ -13,7 +13,7 @@ const Markdown = ({ children }) => {
     h4: ({ children }) => <Title lv={4}>{children}</Title>,
     h5: ({ children }) => <Title lv={5}>{children}</Title>,
     h6: ({ children }) => <Title lv={6}>{children}</Title>,
-  }}>{children}</ReactMarkdown>;
-};
+  }}>{children}</ReactMarkdown>
+}
 
-export default Markdown;
+export default Markdown

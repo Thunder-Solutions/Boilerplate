@@ -1,4 +1,4 @@
-import { Head, Page } from 'cmsComponents';
+import { Head, Page } from 'cmsComponents'
 
 const AdminComponentsPage = () => {
 
@@ -7,7 +7,7 @@ const AdminComponentsPage = () => {
       <Head title="Admin > Content" />
       This will contain a Storybook-like page for component documentation and previews.
     </Page>
-  );
-};
+  )
+}
 
-export default AdminComponentsPage;
+export default AdminComponentsPage

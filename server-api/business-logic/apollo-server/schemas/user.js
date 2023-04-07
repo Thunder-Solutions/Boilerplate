@@ -5,4 +5,4 @@ type User {
   displayName: String
   email: String
 }
-`;
+`

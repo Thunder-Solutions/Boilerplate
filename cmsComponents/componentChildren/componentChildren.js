@@ -1,44 +1,44 @@
-import Component from 'cmsComponents/component/component';
-import Dialog from 'cmsComponents/dialog/dialog';
-import Button from 'cmsComponents/form/button/button';
-import Form from 'cmsComponents/form/form';
-import Select from 'cmsComponents/form/select/select';
-import Icon from 'cmsComponents/icon/icon';
-import { useState } from 'react';
-import { createComponent, NOOP, pureSplice } from 'utilities';
-import * as allComponents from 'components';
+import Component from 'cmsComponents/component/component'
+import Dialog from 'cmsComponents/dialog/dialog'
+import Button from 'cmsComponents/form/button/button'
+import Form from 'cmsComponents/form/form'
+import Select from 'cmsComponents/form/select/select'
+import Icon from 'cmsComponents/icon/icon'
+import { useState } from 'react'
+import { createComponent, NOOP, pureSplice } from 'utilities'
+import * as allComponents from 'components'
 
 const ComponentChildren = ({ componentState, onAdd = NOOP, ...props }) => {
 
   // components state
-  const [components, setComponents] = componentState || useState([]);
-  const [index, setIndex] = useState(components.length);
-  const [fromComponent, setFromComponent] = useState(false);
+  const [components, setComponents] = componentState || useState([])
+  const [index, setIndex] = useState(components.length)
+  const [fromComponent, setFromComponent] = useState(false)
 
   // dialog state
-  const addDialogOpenState = useState(false);
-  const setAddDialogOpen = addDialogOpenState[1];
+  const addDialogOpenState = useState(false)
+  const setAddDialogOpen = addDialogOpenState[1]
   const openAddDialog = (index, _fromComponent) => {
-    setAddDialogOpen(true);
-    setFromComponent(_fromComponent ?? false);
-    if (typeof index === 'number') setIndex(index);
-  };
-  const closeAddDialog = () => { setAddDialogOpen(false); };
+    setAddDialogOpen(true)
+    setFromComponent(_fromComponent ?? false)
+    if (typeof index === 'number') setIndex(index)
+  }
+  const closeAddDialog = () => { setAddDialogOpen(false) }
 
   // add a component
   const handleAdd = (formData) => {
-    const componentName = formData.get('Component');
-    const Component = allComponents[componentName];
-    console.log([...formData.entries()]);
-    const addBelow = formData.get('add') === 'below';
-    const noComponents = components.length === 0;
-    const _index = noComponents ? 0 : (addBelow ? index + 1 : index);
-    const newComponent = createComponent(Component, _index);
-    const newComponents = pureSplice(components, _index, 0, newComponent);
-    setComponents(newComponents);
-    onAdd(newComponent);
-    closeAddDialog();
-  };
+    const componentName = formData.get('Component')
+    const Component = allComponents[componentName]
+    console.log([...formData.entries()])
+    const addBelow = formData.get('add') === 'below'
+    const noComponents = components.length === 0
+    const _index = noComponents ? 0 : (addBelow ? index + 1 : index)
+    const newComponent = createComponent(Component, _index)
+    const newComponents = pureSplice(components, _index, 0, newComponent)
+    setComponents(newComponents)
+    onAdd(newComponent)
+    closeAddDialog()
+  }
 
   return (
     <div {...props}>
@@ -63,7 +63,7 @@ const ComponentChildren = ({ componentState, onAdd = NOOP, ...props }) => {
         </Form>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default ComponentChildren;
+export default ComponentChildren

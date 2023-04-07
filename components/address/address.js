@@ -1,8 +1,8 @@
-import Card from 'components/card/card';
-import Icon from 'components/icon/icon';
-import Link from 'components/link/link';
-import css from './address.module.css';
-import { PropTypes } from 'utilities';
+import Card from 'components/card/card'
+import Icon from 'components/icon/icon'
+import Link from 'components/link/link'
+import css from './address.module.css'
+import { PropTypes } from 'utilities'
 
 const Address = ({
   children,
@@ -15,8 +15,8 @@ const Address = ({
   email,
   isBusiness,
 }) => {
-  const _tel = tel ?? (phone ?? '').replace(/\D/, '');
-  const iconType = isBusiness ? 'Business' : 'Contact';
+  const _tel = tel ?? (phone ?? '').replace(/\D/, '')
+  const iconType = isBusiness ? 'Business' : 'Contact'
   return (
     <Card className={css.addressCard}>
       <Icon className={css.icon} type={iconType} />
@@ -36,8 +36,8 @@ const Address = ({
         {children}
       </address>
     </Card>
-  );
-};
+  )
+}
 
 Address.propTypes = {
   name: PropTypes.string.isRequired,
@@ -50,6 +50,6 @@ Address.propTypes = {
   isBusiness: PropTypes.bool,
   test: PropTypes.element,
   test2: PropTypes.elementType,
-};
+}
 
-export default Address;
+export default Address

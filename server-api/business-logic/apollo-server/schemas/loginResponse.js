@@ -4,4 +4,4 @@ type LoginResponse {
   accessToken: String
   refreshToken: String
 }
-`;
+`

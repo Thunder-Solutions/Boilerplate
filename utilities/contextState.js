@@ -1,8 +1,8 @@
 /**
  * @file - Utilities to wrap useContext in order to work like useState.
  */
-import React, { useState, createContext, useContext, useEffect } from 'react';
-import { NOOP } from './constants';
+import React, { useState, createContext, useContext, useEffect } from 'react'
+import { NOOP } from './constants'
 
 /**
  * @template T
@@ -22,8 +22,8 @@ export const createContextState = (initialState = null) => {
   return createContext({
     value: initialState,
     setValue: NOOP,
-  });
-};
+  })
+}
 
 /**
  * This function operates similarly to `useState`, except it expects the context as an
@@ -35,24 +35,24 @@ export const createContextState = (initialState = null) => {
 export const useContextState = Context => {
 
   // handle wrong type passed in
-  if (typeof Context !== 'object') throw new TypeError(`Expected type "object" but got "${typeof Context}"`);
+  if (typeof Context !== 'object') throw new TypeError(`Expected type "object" but got "${typeof Context}"`)
 
   // wrap the context with `useState`
-  const context = useContext(Context);
+  const context = useContext(Context)
   const [state, setState] = useState({
     value: context.value,
     setValue: newVal => setState({
       ...state,
       value: newVal,
     }),
-  });
+  })
 
   // update the entire context
-  useEffect(() => { context.setValue(state.value); }, [state.value]);
+  useEffect(() => { context.setValue(state.value) }, [state.value])
 
   // return an array of [state, setState] just like `useState` would
-  return [state.value, state.setValue];
-};
+  return [state.value, state.setValue]
+}
 
 /**
  * A higher-order component used to pass the context state to its children without
@@ -63,24 +63,24 @@ export const useContextState = Context => {
  */
 export const withContextState = (Component, ...Contexts) => {
   const ContextComponent = ({ children, ...props }) => {
-    const Context = Contexts[0];
-    const { value: initialValue } = useContext(Context);
-    const [state, setState] = useState(initialValue);
+    const Context = Contexts[0]
+    const { value: initialValue } = useContext(Context)
+    const [state, setState] = useState(initialValue)
 
     const WrappedComponent = ({ children, ...props }) => (
       <Context.Provider value={{ value: state, setValue: setState }}>
         <Component {...props}>{children}</Component>
       </Context.Provider>
-    );
+    )
 
     if (Contexts.length > 1) {
-      const NestedContexts = Contexts.slice(1);
-      const NestedComponent = withContextState(WrappedComponent, ...NestedContexts);
-      return <NestedComponent {...props}>{children}</NestedComponent>;
+      const NestedContexts = Contexts.slice(1)
+      const NestedComponent = withContextState(WrappedComponent, ...NestedContexts)
+      return <NestedComponent {...props}>{children}</NestedComponent>
     }
 
-    return <WrappedComponent {...props}>{children}</WrappedComponent>;
-  };
+    return <WrappedComponent {...props}>{children}</WrappedComponent>
+  }
 
-  return ContextComponent;
-};
+  return ContextComponent
+}

@@ -1,4 +1,4 @@
-import { Head, ComponentChildren, Page, PageTitle } from 'cmsComponents';
+import { Head, ComponentChildren, Page, PageTitle } from 'cmsComponents'
 
 const AdminLayoutPage = () => {
 
@@ -8,7 +8,7 @@ const AdminLayoutPage = () => {
       <PageTitle title="Edit (Layout Name)" />
       <ComponentChildren />
     </Page>
-  );
-};
+  )
+}
 
-export default AdminLayoutPage;
+export default AdminLayoutPage

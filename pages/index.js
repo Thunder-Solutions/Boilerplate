@@ -1,6 +1,6 @@
-import { Container, ErrorMessage, Group, Head, Markdown, Page, PageTitle, Splash, withAPI, Title, Content } from 'components';
-import { getLocaleData } from 'client-api';
-import SplashContext from 'components/splash/splashContext';
+import { Container, ErrorMessage, Group, Head, Markdown, Page, PageTitle, Splash, withAPI, Title, Content } from 'components'
+import { getLocaleData } from 'client-api'
+import SplashContext from 'components/splash/splashContext'
 
 const LazyLoadExample = withAPI({
   query: 'getLocaleData',
@@ -15,12 +15,12 @@ const LazyLoadExample = withAPI({
         </div>
       ))}
     </>
-  );
-});
+  )
+})
 
 const HomePage = ({ response }) => {
-  const { locale, error } = response;
-  if (error) return <ErrorMessage error={error} />;
+  const { locale, error } = response
+  if (error) return <ErrorMessage error={error} />
   return (
     <SplashContext.Provider value={locale.splash}>
       <Page id="Home">
@@ -41,16 +41,16 @@ const HomePage = ({ response }) => {
         </Container>
       </Page>
     </SplashContext.Provider>
-  );
-};
+  )
+}
 
 HomePage.getInitialProps = async () => {
   try {
-    const locale = await getLocaleData('page/home').request;
-    return { response: { locale } };
+    const locale = await getLocaleData('page/home').request
+    return { response: { locale } }
   } catch (error) {
-    return { response: { error } };
+    return { response: { error } }
   }
-};
+}
 
-export default HomePage;
+export default HomePage

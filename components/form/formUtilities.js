@@ -1,20 +1,20 @@
-import { useState, useEffect, useRef, createRef, useContext } from 'react';
-import { createContextState, useContextState, NOOP, getClassName } from 'utilities';
-import css from './formValidation.module.css';
+import { useState, useEffect, useRef, createRef, useContext } from 'react'
+import { createContextState, useContextState, NOOP, getClassName } from 'utilities'
+import css from './formValidation.module.css'
 
 export const DEFAULT_FORM_STATE = {
   valid: false,
   validated: false,
   validationMessage: '',
-};
+}
 
-export const FormContext = createContextState(DEFAULT_FORM_STATE);
+export const FormContext = createContextState(DEFAULT_FORM_STATE)
 
 export const DEFAULT_SUBMIT = data => {
-  console.group('Form submitted without a handler.');
-  console.log('Form Data:', [...data.entries()]);
-  console.groupEnd();
-};
+  console.group('Form submitted without a handler.')
+  console.log('Form Data:', [...data.entries()])
+  console.groupEnd()
+}
 
 /**
  * Get validation helpers for custom validation.
@@ -26,21 +26,21 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
 
   const {
     className: _className = '',
-    getValidityMessage = () => '',
+    getValidityMessage = (() => ''),
     onBlur = NOOP,
-  } = props;
+  } = props
 
-  const [validated, setValidated] = useState(false);
-  const [touched, setTouched] = useState(false);
-  const [dirty, setDirty] = useState(false);
-  const inputRef = useRef(null);
-  const inputRefs = useRef(inputArr.map(createRef));
+  const [validated, setValidated] = useState(false)
+  const [touched, setTouched] = useState(false)
+  const [dirty, setDirty] = useState(false)
+  const inputRef = useRef(null)
+  const inputRefs = useRef(inputArr.map(createRef))
 
   const inputState = {
     touched,
     dirty,
     validated,
-  };
+  }
 
   const className = getClassName({
     [css.touched]: touched,
@@ -48,38 +48,38 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
     [css.dirty]: dirty,
     [css.pristine]: !dirty,
     [css.validated]: validated,
-  }, css.control, inputClass, _className);
+  }, css.control, inputClass, _className)
 
   const checkValidity = () => {
     const checkInputRef = inputRef => {
-      const input = inputRef.current;
-      const inputIsCheckable = Object.prototype.hasOwnProperty.call(input, 'checked');
-      if (inputIsCheckable && !input.checked) return input.setCustomValidity('');
-      const validityMessage = getValidityMessage(input.value);
-      input.setCustomValidity(validityMessage);
-    };
-    if (inputRef.current) checkInputRef(inputRef);
-    else inputRefs.current.forEach(checkInputRef);
-  };
+      const input = inputRef.current
+      const inputIsCheckable = Object.prototype.hasOwnProperty.call(input, 'checked')
+      if (inputIsCheckable && !input.checked) return input.setCustomValidity('')
+      const validityMessage = getValidityMessage(input.value)
+      input.setCustomValidity(validityMessage)
+    }
+    if (inputRef.current) checkInputRef(inputRef)
+    else inputRefs.current.forEach(checkInputRef)
+  }
 
   const validate = event => {
-    const { value } = event.currentTarget;
-    setDirty(!!value && value !== '');
-    if (inputRef.current) inputRef.current.setCustomValidity('');
-    else inputRefs.current.forEach(inputRef => inputRef.current.setCustomValidity(''));
-  };
+    const { value } = event.currentTarget
+    setDirty(!!value && value !== '')
+    if (inputRef.current) inputRef.current.setCustomValidity('')
+    else inputRefs.current.forEach(inputRef => inputRef.current.setCustomValidity(''))
+  }
 
   const handleBlur = event => {
-    checkValidity();
-    setTouched(true);
-    onBlur(event);
-  };
+    checkValidity()
+    setTouched(true)
+    onBlur(event)
+  }
 
-  useEffect(checkValidity); // check once on render
+  useEffect(checkValidity) // check once on render
 
   // keep "validated" in sync with the context
-  const { value: { validated: _validated } } = useContext(FormContext);
-  useEffect(() => { setValidated(_validated); }, [_validated]);
+  const { value: { validated: _validated } } = useContext(FormContext)
+  useEffect(() => { setValidated(_validated) }, [_validated])
 
   return {
     className,
@@ -88,5 +88,5 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
     inputRefs,
     inputState,
     validate,
-  };
-};
+  }
+}

@@ -7,6 +7,6 @@ const variables = {
   'en-US': {
     year: new Date().getFullYear(),
   },
-};
+}
 
-export default variables;
+export default variables

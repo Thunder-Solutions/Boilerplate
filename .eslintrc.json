@@ -50,9 +50,7 @@
       1,
       "before"
     ],
-    "no-unused-vars": "off",
-    "semi": ["error", "always"],
-    "semi-style": ["error", "last"]
+    "no-unused-vars": "off"
   },
   "overrides": [
     {

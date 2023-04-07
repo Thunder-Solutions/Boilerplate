@@ -1,7 +1,7 @@
-import css from './toDos.module.css';
-import withAPI from '../withAPI/withAPI';
-import Title from 'components/title/title';
-import Content from 'components/content/content';
+import css from './toDos.module.css'
+import withAPI from '../withAPI/withAPI'
+import Title from 'components/title/title'
+import Content from 'components/content/content'
 
 const ToDos = withAPI({
   query: 'getToDos',
@@ -15,7 +15,7 @@ const ToDos = withAPI({
         </div>
       ))}
     </div>
-  );
-});
+  )
+})
 
-export default ToDos;
+export default ToDos

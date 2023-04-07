@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
 /**
  * Contains all the global locale text from `locales/global/<locale>.json`.
@@ -6,6 +6,6 @@ import { createContext } from 'react';
  */
 const LocaleContext = createContext({
   global: {},
-});
+})
 
-export default LocaleContext;
+export default LocaleContext

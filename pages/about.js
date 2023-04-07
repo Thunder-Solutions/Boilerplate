@@ -1,11 +1,11 @@
-import { Container, ErrorMessage, Group, Head, Title, Page, PageTitle, Content } from 'components';
-import { getLocaleData } from 'client-api';
+import { Container, ErrorMessage, Group, Head, Title, Page, PageTitle, Content } from 'components'
+import { getLocaleData } from 'client-api'
 
 const AboutPage = ({ response }) => {
 
-  const { locale, error } = response;
+  const { locale, error } = response
 
-  if (error) return <ErrorMessage error={error} />;
+  if (error) return <ErrorMessage error={error} />
 
   return (
     <Page id="About">
@@ -22,16 +22,16 @@ const AboutPage = ({ response }) => {
         </Group>
       </Container>
     </Page>
-  );
-};
+  )
+}
 
 AboutPage.getInitialProps = async () => {
   try {
-    const locale = await getLocaleData('page/about').request;
-    return { response: { locale } };
+    const locale = await getLocaleData('page/about').request
+    return { response: { locale } }
   } catch (error) {
-    return { response: { error } };
+    return { response: { error } }
   }
-};
+}
 
-export default AboutPage;
+export default AboutPage
