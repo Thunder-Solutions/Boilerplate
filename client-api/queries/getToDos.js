@@ -1,4 +1,4 @@
-import { gqlQuery } from 'utilities'
+import { gqlQuery } from 'utilities';
 
 const getToDos = () => gqlQuery(`
   query GetToDos {
@@ -10,6 +10,6 @@ const getToDos = () => gqlQuery(`
   }
 `, {
   fetchPolicy: 'no-cache',
-})
+});
 
-export default getToDos
+export default getToDos;

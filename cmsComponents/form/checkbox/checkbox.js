@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { NOOP } from 'utilities'
-import { getValidationHelpers } from '../formUtilities'
-import Label from '../label/label'
-import css from './checkbox.module.css'
+import { useState } from 'react';
+import { NOOP } from 'utilities';
+import { getValidationHelpers } from '../formUtilities';
+import Label from '../label/label';
+import css from './checkbox.module.css';
 
 const Checkbox = props => {
 
@@ -12,7 +12,7 @@ const Checkbox = props => {
     label = '',
     required = false,
     checked: _checked = false,
-  } = props
+  } = props;
 
   const {
     className,
@@ -22,19 +22,19 @@ const Checkbox = props => {
   } = getValidationHelpers({
     props,
     inputClass: css.checkbox,
-  })
+  });
 
-  const [checked, setChecked] = useState(_checked)
+  const [checked, setChecked] = useState(_checked);
   const handleChange = event => {
-    setChecked(event.target.checked)
-    validate(event)
-    onChange(event)
-  }
+    setChecked(event.target.checked);
+    validate(event);
+    onChange(event);
+  };
 
-  const toggleChecked = () => { setChecked(!checked) }
+  const toggleChecked = () => { setChecked(!checked); };
   const handleKeyDown = event => {
-    if (event.key === ' ') toggleChecked()
-  }
+    if (event.key === ' ') toggleChecked();
+  };
 
   return (
     <Label label={label} required={required} inline={true}>
@@ -54,7 +54,7 @@ const Checkbox = props => {
         data-is-checkable="true"
       />
     </Label>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;

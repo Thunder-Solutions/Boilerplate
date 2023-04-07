@@ -1,4 +1,4 @@
-import { Head, Page, Link } from 'cmsComponents'
+import { Head, Page, Link } from 'cmsComponents';
 
 const AdminLayoutsPage = () => {
 
@@ -8,7 +8,7 @@ const AdminLayoutsPage = () => {
       This will be a list of layouts. Choose one to edit/delete or add new.
       <div><Link href="/admin/content/layouts/layout">Dummy Layout</Link></div>
     </Page>
-  )
-}
+  );
+};
 
-export default AdminLayoutsPage
+export default AdminLayoutsPage;

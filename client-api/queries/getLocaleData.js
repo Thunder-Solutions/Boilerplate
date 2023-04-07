@@ -1,4 +1,4 @@
-import { getJSON } from 'utilities'
+import { getJSON } from 'utilities';
 
 /**
  * A shared getter for all locale translations
@@ -7,9 +7,9 @@ import { getJSON } from 'utilities'
  * @returns {Object} The JSON data containing text/url content in the requested language
  */
 const getLocaleData = (path, locale = 'en-US') => {
-  const global = path === 'global'
-  const [group, id] = path.split('/')
-  return getJSON('getLocaleData', { group, id, locale, global })
-}
+  const global = path === 'global';
+  const [group, id] = path.split('/');
+  return getJSON('getLocaleData', { group, id, locale, global });
+};
 
-export default getLocaleData
+export default getLocaleData;

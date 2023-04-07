@@ -1,10 +1,10 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
 
 const {
   MAILER_EMAIL,
   MAILER_CLIENT_ID,
   MAILER_PRIVATE_KEY,
-} = process.env
+} = process.env;
 
 const DEFAULT_MESSAGE = {
   to: 'jon.dewitt@thunder.solutions, vinnie.volpe@thunder.solutions',
@@ -16,7 +16,7 @@ const DEFAULT_MESSAGE = {
       <a href="https://thunder.solutions">https://thunder.solutions</a>.
     </p>
   `,
-}
+};
 
 export const sendEmail = async (_message = {}) => {
   const message = {
@@ -25,7 +25,7 @@ export const sendEmail = async (_message = {}) => {
     text: _message.text || (_message.html || '').replace(/(<([^>]+)>)/gi, '') || DEFAULT_MESSAGE.text,
     html: _message.html || _message.text || DEFAULT_MESSAGE.html,
     from: `Thunder Solutions LLC <${MAILER_EMAIL}>`,
-  }
+  };
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -34,11 +34,11 @@ export const sendEmail = async (_message = {}) => {
       serviceClient: MAILER_CLIENT_ID,
       privateKey: MAILER_PRIVATE_KEY,
     },
-  })
+  });
   try {
-    await transporter.verify()
-    return await transporter.sendMail(message)
+    await transporter.verify();
+    return await transporter.sendMail(message);
   } catch (err) {
-    return err
+    return err;
   }
-}
+};

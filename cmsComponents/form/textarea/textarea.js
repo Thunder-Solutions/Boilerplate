@@ -1,7 +1,7 @@
-import css from './textarea.module.css'
-import { getValidationHelpers } from '../formUtilities'
-import Label from '../label/label'
-import { NOOP } from 'utilities'
+import css from './textarea.module.css';
+import { getValidationHelpers } from '../formUtilities';
+import Label from '../label/label';
+import { NOOP } from 'utilities';
 
 const Textarea = ({ children, ...props }) => {
 
@@ -11,7 +11,7 @@ const Textarea = ({ children, ...props }) => {
     onInput = NOOP,
     label = '',
     required = false,
-  } = props
+  } = props;
 
   const {
     className,
@@ -21,13 +21,13 @@ const Textarea = ({ children, ...props }) => {
   } = getValidationHelpers({
     props,
     inputClass: css.textarea,
-  })
+  });
 
   const handleInput = event => {
-    inputRef.current.value = autoFormat(inputRef.current.value)
-    validate(event)
-    onInput(event)
-  }
+    inputRef.current.value = autoFormat(inputRef.current.value);
+    validate(event);
+    onInput(event);
+  };
 
   return (
     <Label label={label} required={required}>
@@ -39,7 +39,7 @@ const Textarea = ({ children, ...props }) => {
         onInput={handleInput}
       >{children}</textarea>
     </Label>
-  )
-}
+  );
+};
 
-export default Textarea
+export default Textarea;

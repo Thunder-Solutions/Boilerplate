@@ -1,8 +1,8 @@
-import Icon from 'cmsComponents/icon/icon'
-import { NOOP } from 'utilities'
-import { getValidationHelpers } from '../formUtilities'
-import Label from '../label/label'
-import css from './select.module.css'
+import Icon from 'cmsComponents/icon/icon';
+import { NOOP } from 'utilities';
+import { getValidationHelpers } from '../formUtilities';
+import Label from '../label/label';
+import css from './select.module.css';
 
 const Select = ({ children, ...props }) => {
 
@@ -12,7 +12,7 @@ const Select = ({ children, ...props }) => {
     label = '',
     required = false,
     defaultValue = '',
-  } = props
+  } = props;
 
   const {
     className,
@@ -22,12 +22,12 @@ const Select = ({ children, ...props }) => {
   } = getValidationHelpers({
     props,
     inputClass: css.select,
-  })
+  });
 
   const handleChange = event => {
-    validate(event)
-    onChange(event)
-  }
+    validate(event);
+    onChange(event);
+  };
 
   return (
     <Label label={label} required={required}>
@@ -49,7 +49,7 @@ const Select = ({ children, ...props }) => {
         <Icon type="Down" className={css.icon} />
       </span>
     </Label>
-  )
-}
+  );
+};
 
-export default Select
+export default Select;

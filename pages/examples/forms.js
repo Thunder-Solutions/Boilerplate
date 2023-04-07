@@ -1,15 +1,15 @@
-import { Container, ErrorMessage, Group, Head, Page, PageTitle, Form, Input, Content, Button, Textarea, Fieldset, Select } from 'components'
-import { getLocaleData } from 'client-api'
+import { Container, ErrorMessage, Group, Head, Page, PageTitle, Form, Input, Content, Button, Textarea, Fieldset, Select } from 'components';
+import { getLocaleData } from 'client-api';
 
 const FormsPage = ({ response }) => {
 
-  const { locale, error } = response
+  const { locale, error } = response;
 
   const handleTestForm = async data => {
-    await new Promise(resolve => setTimeout(() => resolve(), 1000))
-  }
+    await new Promise(resolve => setTimeout(() => resolve(), 1000));
+  };
 
-  if (error) return <ErrorMessage error={error} />
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <Page id="To Dos">
@@ -36,16 +36,16 @@ const FormsPage = ({ response }) => {
         </Group>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
 FormsPage.getInitialProps = async () => {
   try {
-    const locale = await getLocaleData('page/forms').request
-    return { response: { locale } }
+    const locale = await getLocaleData('page/forms').request;
+    return { response: { locale } };
   } catch (error) {
-    return { response: { error } }
+    return { response: { error } };
   }
-}
+};
 
-export default FormsPage
+export default FormsPage;

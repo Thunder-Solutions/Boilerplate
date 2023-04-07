@@ -1,5 +1,5 @@
-import css from './page.module.css'
-import { SiteFooter, SiteHeader } from 'components'
+import css from './page.module.css';
+import { SiteFooter, SiteHeader } from 'components';
 
 const Page = ({ children, id }) => {
   return (
@@ -8,7 +8,7 @@ const Page = ({ children, id }) => {
       <main>{children}</main>
       <SiteFooter/>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

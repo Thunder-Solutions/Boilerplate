@@ -1,11 +1,11 @@
-import { Container, ErrorMessage, Group, Head, Title, Page, PageTitle, Content, Link, Address } from 'components'
-import { getLocaleData } from 'client-api'
+import { Container, ErrorMessage, Group, Head, Title, Page, PageTitle, Content, Link, Address } from 'components';
+import { getLocaleData } from 'client-api';
 
 const ContactPage = ({ response }) => {
 
-  const { locale, error } = response
+  const { locale, error } = response;
 
-  if (error) return <ErrorMessage error={error} />
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <Page id="Contact">
@@ -30,16 +30,16 @@ const ContactPage = ({ response }) => {
         </Group>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
 ContactPage.getInitialProps = async () => {
   try {
-    const locale = await getLocaleData('page/contact').request
-    return { response: { locale } }
+    const locale = await getLocaleData('page/contact').request;
+    return { response: { locale } };
   } catch (error) {
-    return { response: { error } }
+    return { response: { error } };
   }
-}
+};
 
-export default ContactPage
+export default ContactPage;

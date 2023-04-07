@@ -1,9 +1,9 @@
-import ComponentDialog from 'cmsComponents/componentDialog/componentDialog'
-import Button from 'cmsComponents/form/button/button'
-import Icon from 'cmsComponents/icon/icon'
-import { useState } from 'react'
-import { getDefaultProps, NOOP, pascalToSpaces } from 'utilities'
-import css from './component.module.css'
+import ComponentDialog from 'cmsComponents/componentDialog/componentDialog';
+import Button from 'cmsComponents/form/button/button';
+import Icon from 'cmsComponents/icon/icon';
+import { useState } from 'react';
+import { getDefaultProps, NOOP, pascalToSpaces } from 'utilities';
+import css from './component.module.css';
 
 const Component = ({
   children,
@@ -13,36 +13,36 @@ const Component = ({
   ...props
 }) => {
 
-  const componentClass = `${className} ${css.component}`
-  const cmsProps = Object.entries(Component.propTypes ?? {})
-  const defaultPropState = getDefaultProps(Component)
-  const [propState, setPropState] = useState(defaultPropState)
-  const editDialogOpenState = useState(false)
-  const setEditDialogOpen = editDialogOpenState[1]
-  const openEditDialog = () => { setEditDialogOpen(true) }
+  const componentClass = `${className} ${css.component}`;
+  const cmsProps = Object.entries(Component.propTypes ?? {});
+  const defaultPropState = getDefaultProps(Component);
+  const [propState, setPropState] = useState(defaultPropState);
+  const editDialogOpenState = useState(false);
+  const setEditDialogOpen = editDialogOpenState[1];
+  const openEditDialog = () => { setEditDialogOpen(true); };
   const updatePropState = (prop, value) => {
     setPropState({
       ...propState,
       [prop]: value,
-    })
-  }
+    });
+  };
 
   const menuHandlers = {
-    cut: () => { console.log('clicked cut') },
-    copy: () => { console.log('clicked copy') },
-    paste: () => { console.log('clicked paste') },
+    cut: () => { console.log('clicked cut'); },
+    copy: () => { console.log('clicked copy'); },
+    paste: () => { console.log('clicked paste'); },
     add: onAdd,
     edit: openEditDialog,
-    remove: () => { console.log('clicked remove') },
-  }
+    remove: () => { console.log('clicked remove'); },
+  };
 
   const tryRenderComponent = (Component, propState) => {
     try {
-      return <Component {...propState} />
+      return <Component {...propState} />;
     } catch (err) {
-      return <>Could not render component: {err}</>
+      return <>Could not render component: {err}</>;
     }
-  }
+  };
 
   return (
     <div {...props} className={componentClass}>
@@ -64,7 +64,7 @@ const Component = ({
       />
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Component
+export default Component;

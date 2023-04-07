@@ -1,4 +1,4 @@
-import { Head, ComponentChildren, Page, PageTitle } from 'cmsComponents'
+import { Head, ComponentChildren, Page, PageTitle } from 'cmsComponents';
 
 const AdminPagePage = () => {
 
@@ -8,7 +8,7 @@ const AdminPagePage = () => {
       <PageTitle title="Edit (Page Name)" />
       <ComponentChildren />
     </Page>
-  )
-}
+  );
+};
 
-export default AdminPagePage
+export default AdminPagePage;

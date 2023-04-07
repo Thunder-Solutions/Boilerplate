@@ -3,11 +3,11 @@ const addToDo = ({ ToDo }) => async ({ title, description }) => {
   const ToDoModel = new ToDo({
     title,
     description,
-  })
+  });
 
-  const newToDo = await ToDoModel.save()
+  const newToDo = await ToDoModel.save();
 
-  return newToDo
-}
+  return newToDo;
+};
 
-export default addToDo
+export default addToDo;
