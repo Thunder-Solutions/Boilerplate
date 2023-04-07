@@ -22,9 +22,11 @@ const Head = ({ children, title: _title, meta = {} }) => {
     ...meta,
   }
 
+  const fullTitle = `${SITE_TITLE}${_title ? ` | ${_title}` : ''}`
+
   return (
     <NextHead>
-      <title>{SITE_TITLE}{_title ? ` | ${_title}` : ''}</title>
+      <title>{fullTitle}</title>
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={`${SITE_ROOT_URL}${url}`} />
