@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose'
+import { Schema } from 'mongoose';
 
 const User = new Schema({
   username: String,
@@ -7,6 +7,6 @@ const User = new Schema({
   hash: String,
   salt: String,
   tokens: [String],
-})
+});
 
-export default User
+export default User;

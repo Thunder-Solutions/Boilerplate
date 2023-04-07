@@ -1,11 +1,11 @@
-import { Container, ErrorMessage, Group, Head, Page, PageTitle, ToDos, Content } from 'components'
-import { getLocaleData } from 'client-api'
+import { Container, ErrorMessage, Group, Head, Page, PageTitle, ToDos, Content } from 'components';
+import { getLocaleData } from 'client-api';
 
 const ToDoPage = ({ response }) => {
 
-  const { locale, error } = response
+  const { locale, error } = response;
 
-  if (error) return <ErrorMessage error={error} />
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <Page id="To Dos">
@@ -20,16 +20,16 @@ const ToDoPage = ({ response }) => {
         </Group>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
 ToDoPage.getInitialProps = async () => {
   try {
-    const locale = await getLocaleData('page/to-dos').request
-    return { response: { locale } }
+    const locale = await getLocaleData('page/to-dos').request;
+    return { response: { locale } };
   } catch (error) {
-    return { response: { error } }
+    return { response: { error } };
   }
-}
+};
 
-export default ToDoPage
+export default ToDoPage;

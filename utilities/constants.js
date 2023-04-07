@@ -2,7 +2,7 @@
  * No operation: a DRY constant for setting default callbacks
  * @returns {void}
  */
-export const NOOP = () => {}
+export const NOOP = () => {};
 
 /**
  * Empty Values: DRY constants for default values
@@ -18,7 +18,7 @@ export const EMPTY = {
   OBJ: {},
   STR: '',
   SYM: Symbol('sym'),
-}
+};
 
 /**
  * A slightly more legible format to represent type constructor classes
@@ -32,17 +32,17 @@ export const EMPTY = {
  * @template T
  * @type {Map<Constructor<T>, T>}
  */
-const emptyMap = new Map()
-emptyMap.set(Array, EMPTY.ARR)
-emptyMap.set(BigInt, EMPTY.BIGINT)
-emptyMap.set(Boolean, EMPTY.BOOL)
-emptyMap.set(globalThis.HTMLElement, EMPTY.EL)
-emptyMap.set(Function, EMPTY.FN)
-emptyMap.set(globalThis.Node, EMPTY.NODE)
-emptyMap.set(Number, EMPTY.NUM)
-emptyMap.set(Object, EMPTY.OBJ)
-emptyMap.set(String, EMPTY.STR)
-emptyMap.set(Symbol, EMPTY.SYM)
+const emptyMap = new Map();
+emptyMap.set(Array, EMPTY.ARR);
+emptyMap.set(BigInt, EMPTY.BIGINT);
+emptyMap.set(Boolean, EMPTY.BOOL);
+emptyMap.set(globalThis.HTMLElement, EMPTY.EL);
+emptyMap.set(Function, EMPTY.FN);
+emptyMap.set(globalThis.Node, EMPTY.NODE);
+emptyMap.set(Number, EMPTY.NUM);
+emptyMap.set(Object, EMPTY.OBJ);
+emptyMap.set(String, EMPTY.STR);
+emptyMap.set(Symbol, EMPTY.SYM);
 
 /**
  * Gets a default (empty) value for the provided type
@@ -50,4 +50,4 @@ emptyMap.set(Symbol, EMPTY.SYM)
  * @param {Constructor<T>} Type - The constructor of the desired type
  * @returns {T} - The default value of the given type
  */
-export const empty = Type => emptyMap.get(Type)
+export const empty = Type => emptyMap.get(Type);

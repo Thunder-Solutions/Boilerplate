@@ -1,16 +1,16 @@
-import NextHead from 'next/head'
+import NextHead from 'next/head';
 
 const Head = ({ children, title: _title, meta = {} }) => {
 
-  const SITE_TITLE = 'Thunder Solutions'
-  const SITE_ROOT_URL = 'https://thunder.solutions'
+  const SITE_TITLE = 'Thunder Solutions';
+  const SITE_ROOT_URL = 'https://thunder.solutions';
 
   const DEFAULT_META = {
     title: 'CMS Portal',
     description: 'An administrative portal and CMS.',
     url: '/admin',
     image: '/images/cms-meta.gif',
-  }
+  };
 
   const {
     title,
@@ -20,9 +20,9 @@ const Head = ({ children, title: _title, meta = {} }) => {
   } = {
     ...DEFAULT_META,
     ...meta,
-  }
+  };
 
-  const fullTitle = `${SITE_TITLE}${_title ? ` | ${_title}` : ''}`
+  const fullTitle = `${SITE_TITLE}${_title ? ` | ${_title}` : ''}`;
 
   return (
     <NextHead>
@@ -35,7 +35,7 @@ const Head = ({ children, title: _title, meta = {} }) => {
       <meta name="description" content={description} />
       {children}
     </NextHead>
-  )
-}
+  );
+};
 
-export default Head
+export default Head;

@@ -1,9 +1,9 @@
-import Dialog from 'cmsComponents/dialog/dialog'
-import Checkbox from 'cmsComponents/form/checkbox/checkbox'
-import Form from 'cmsComponents/form/form'
-import Input from 'cmsComponents/form/input/input'
-import { useState } from 'react'
-import { bool, getPropTypeInfo, NOOP, pascalToSpaces } from 'utilities'
+import Dialog from 'cmsComponents/dialog/dialog';
+import Checkbox from 'cmsComponents/form/checkbox/checkbox';
+import Form from 'cmsComponents/form/form';
+import Input from 'cmsComponents/form/input/input';
+import { useState } from 'react';
+import { bool, getPropTypeInfo, NOOP, pascalToSpaces } from 'utilities';
 
 const ComponentDialog = ({
   children,
@@ -18,15 +18,15 @@ const ComponentDialog = ({
       {children}
       <Form>
         {cmsProps.map(([prop, propType], idx) => {
-          const { required, type } = getPropTypeInfo(propType)
-          const value = propState[prop]
+          const { required, type } = getPropTypeInfo(propType);
+          const value = propState[prop];
           const updateHandlers = {
-            str: event => { onUpdateProps(prop, event.target.value) },
-            num: event => { onUpdateProps(prop, +event.target.value) },
-            bool: event => { onUpdateProps(prop, event.target.checked) },
-          }
+            str: event => { onUpdateProps(prop, event.target.value); },
+            num: event => { onUpdateProps(prop, +event.target.value); },
+            bool: event => { onUpdateProps(prop, event.target.checked); },
+          };
 
-          const sharedInputProps = { label: pascalToSpaces(prop), value, required }
+          const sharedInputProps = { label: pascalToSpaces(prop), value, required };
           const inputMap = {
             String: {
               InputComponent: Input,
@@ -40,8 +40,8 @@ const ComponentDialog = ({
               InputComponent: Checkbox,
               inputProps: { onChange: updateHandlers.bool, type: 'checkbox', checked: bool(value) },
             },
-          }
-          const { InputComponent, inputProps } = inputMap[type?.name] ?? {}
+          };
+          const { InputComponent, inputProps } = inputMap[type?.name] ?? {};
 
           // if a component exists to handle this type,
           // add a field for it, otherwise skip it.
@@ -52,11 +52,11 @@ const ComponentDialog = ({
                 autoFocus={idx === 0}
                 key={prop}
               />
-            : <></>
+            : <></>;
         })}
       </Form>
     </Dialog>
-  )
-}
+  );
+};
 
-export default ComponentDialog
+export default ComponentDialog;

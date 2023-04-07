@@ -7,13 +7,13 @@
 export const getClassName = (classMap, ...classes) => {
   const classArr = [
     ...Object.entries(classMap).reduce((classes, [_class, applyClass]) => {
-      if (applyClass) classes.push(_class)
-      return classes
+      if (applyClass) classes.push(_class);
+      return classes;
     }, []),
     ...classes,
-  ]
-  return classArr.join(' ')
-}
+  ];
+  return classArr.join(' ');
+};
 
 /**
  * Includes null and all nonprimitive types
@@ -21,10 +21,10 @@ export const getClassName = (classMap, ...classes) => {
  * @returns {string} The type of the provided value
  */
 export const getType = val => {
-  if (val === null) return 'null'
-  if (typeof val === 'object') return val.constructor.name.toLowerCase()
-  return typeof val
-}
+  if (val === null) return 'null';
+  if (typeof val === 'object') return val.constructor.name.toLowerCase();
+  return typeof val;
+};
 
 /**
  * A safe alternative to `typeof`, including null and all nonprimitive types
@@ -33,12 +33,12 @@ export const getType = val => {
  * @returns {boolean|TypeError} `true` if the value matches the provided type(s)
  */
 export const checkType = (val, type) => {
-  const validString = getType(type) === 'string'
-  const validArray = getType(type) === 'array' && type.every(t => getType(t) === 'string')
-  if (!validString && !validArray) return new TypeError('`checkType()` expects either a string or array of strings in the second argument')
-  if (validString) return getType(val) === type
-  if (validArray) return type.some(t => getType(val) === t)
-}
+  const validString = getType(type) === 'string';
+  const validArray = getType(type) === 'array' && type.every(t => getType(t) === 'string');
+  if (!validString && !validArray) return new TypeError('`checkType()` expects either a string or array of strings in the second argument');
+  if (validString) return getType(val) === type;
+  if (validArray) return type.some(t => getType(val) === t);
+};
 
 /**
  * Converts any value to a boolean, but non-empty strings must read "true" or "false"
@@ -46,14 +46,14 @@ export const checkType = (val, type) => {
  * @returns {boolean|TypeError} The converted value based on the input
  */
 export const bool = val => {
-  const isString = checkType(val, 'string')
-  const _val = isString ? val.toLowerCase().trim() : val
-  const strValues = ['', 'true', 'false']
+  const isString = checkType(val, 'string');
+  const _val = isString ? val.toLowerCase().trim() : val;
+  const strValues = ['', 'true', 'false'];
   if (isString && !strValues.includes(_val)) {
-    return new TypeError('Could not convert string to boolean because the string was not empty and neither "true" nor "false"')
+    return new TypeError('Could not convert string to boolean because the string was not empty and neither "true" nor "false"');
   }
-  return isString ? _val === 'true' : Boolean(_val)
-}
+  return isString ? _val === 'true' : Boolean(_val);
+};
 
 /**
  * A simpler syntax for objects with typed properties
@@ -72,31 +72,31 @@ export const bool = val => {
  * @returns {TypedObject<unknown>} The final merged object
  */
 export const mergeDeep = (fallback, override) => Object.keys(fallback).reduce((outputObj, key) => {
-  const isObj1 = checkType(fallback[key], 'object')
-  const isObj2 = checkType(override[key], 'object')
-  const isArr1 = checkType(fallback[key], 'array')
-  const isArr2 = checkType(override[key], 'array')
+  const isObj1 = checkType(fallback[key], 'object');
+  const isObj2 = checkType(override[key], 'object');
+  const isArr1 = checkType(fallback[key], 'array');
+  const isArr2 = checkType(override[key], 'array');
   if (isObj1 && isObj2) {
-    outputObj[key] = mergeDeep(fallback[key], override[key])
+    outputObj[key] = mergeDeep(fallback[key], override[key]);
   } else if (isArr1 && isArr2) {
 
     // special treatment for arrays
-    const isObjArr = arr => arr.every(i => checkType(i, 'object'))
-    const objArr = isObjArr(fallback[key]) && isObjArr(override[key])
+    const isObjArr = arr => arr.every(i => checkType(i, 'object'));
+    const objArr = isObjArr(fallback[key]) && isObjArr(override[key]);
     if (objArr) {
 
       // merge all objects inside arrays
-      outputObj[key] = fallback[key].map((obj, idx) => mergeDeep(obj, override[key][idx]))
+      outputObj[key] = fallback[key].map((obj, idx) => mergeDeep(obj, override[key][idx]));
     } else {
 
       // shallow merge arrays of primitives
-      outputObj[key] = [...fallback[key], ...override[key]]
+      outputObj[key] = [...fallback[key], ...override[key]];
     }
   } else {
-    outputObj[key] = override[key] ?? fallback[key]
+    outputObj[key] = override[key] ?? fallback[key];
   }
-  return outputObj
-}, { ...fallback, ...override })
+  return outputObj;
+}, { ...fallback, ...override });
 
 /**
  * Parses a single string's variables provided the locale and variable mappings
@@ -106,14 +106,14 @@ export const mergeDeep = (fallback, override) => Object.keys(fallback).reduce((o
  * @returns {string} The final parsed string
  */
 const parseVariablesInString = (str, locale, variables) => {
-  const varKV = Object.entries(variables[locale])
+  const varKV = Object.entries(variables[locale]);
   return varKV.reduce((outputStr, [key, value]) => {
     outputStr = outputStr.replace(key, value)
       .replace(/(?<!\\)({|})/g, '')
-      .replace(/\\/g, '')
-    return outputStr
-  }, str)
-}
+      .replace(/\\/g, '');
+    return outputStr;
+  }, str);
+};
 
 /**
  * Parses all of the variables in the provided object's values
@@ -123,13 +123,13 @@ const parseVariablesInString = (str, locale, variables) => {
  * @returns {DeepStringObject} The same structured data that was passed in, except with replaced variable values
  */
 export const parseVariables = (localeData, locale, variables) => {
-  const init = checkType(localeData, 'array') ? [] : {}
+  const init = checkType(localeData, 'array') ? [] : {};
   return Object.entries(localeData).reduce((parsedLocaleData, [key, value]) => {
-    if (checkType(value, 'string')) parsedLocaleData[key] = parseVariablesInString(value, locale, variables)
-    else parsedLocaleData[key] = parseVariables(value, locale, variables)
-    return parsedLocaleData
-  }, init)
-}
+    if (checkType(value, 'string')) parsedLocaleData[key] = parseVariablesInString(value, locale, variables);
+    else parsedLocaleData[key] = parseVariables(value, locale, variables);
+    return parsedLocaleData;
+  }, init);
+};
 
 /**
  * This function quickly creates a URL object from any href string
@@ -137,23 +137,23 @@ export const parseVariables = (localeData, locale, variables) => {
  * @returns {URL} - A URL object created from the href passed in
  */
 export const getURL = (href, { relativeTo = 'current', basePath: _basePathOverride } = {}) => {
-  if (!href) return null
-  const absRegex = /^([^/]+?)\/\//
-  const isAbsolute = absRegex.test(href)
-  if (isAbsolute) return new URL(href)
-  const ORIGIN = process.env.NEXT_PUBLIC_ORIGIN
-  const basePathOverride = String(_basePathOverride)
-  const isBasePathAbsolute = absRegex.test(basePathOverride)
+  if (!href) return null;
+  const absRegex = /^([^/]+?)\/\//;
+  const isAbsolute = absRegex.test(href);
+  if (isAbsolute) return new URL(href);
+  const ORIGIN = process.env.NEXT_PUBLIC_ORIGIN;
+  const basePathOverride = String(_basePathOverride);
+  const isBasePathAbsolute = absRegex.test(basePathOverride);
   const basePathMap = {
     current: typeof window === 'undefined' ? ORIGIN : location.href.replace(/\/$/, ''),
     origin: ORIGIN,
     custom: isBasePathAbsolute ? basePathOverride : `${ORIGIN}${basePathOverride.replace(/\/$/, '')}`,
-  }
-  const basePath = basePathMap[relativeTo]
-  const relativeHref = href.replace(/^\//, '')
-  const fullHref = basePath + '/' + relativeHref
-  return new URL(fullHref)
-}
+  };
+  const basePath = basePathMap[relativeTo];
+  const relativeHref = href.replace(/^\//, '');
+  const fullHref = basePath + '/' + relativeHref;
+  return new URL(fullHref);
+};
 
 /**
  * Converts PascalCase (and camelCase) to a capitalized title with spaces.
@@ -162,11 +162,11 @@ export const getURL = (href, { relativeTo = 'current', basePath: _basePathOverri
  * @returns {string} - The converted string with spaces
  */
 export const pascalToSpaces = str => {
-  const pascalRegex = /([A-Z1-9])([A-Z1-9])([a-z])|([a-z])([A-Z1-9])/g
+  const pascalRegex = /([A-Z1-9])([A-Z1-9])([a-z])|([a-z])([A-Z1-9])/g;
   return str
     .replace(pascalRegex, '$1$4 $2$3$5')
-    .replace(/\b\w/g, c => c.toUpperCase())
-}
+    .replace(/\b\w/g, c => c.toUpperCase());
+};
 
 /**
  * A pure alternative to `Array.prototype.splice`, to avoid mutation
@@ -177,7 +177,7 @@ export const pascalToSpaces = str => {
  * @returns {unknown[]} - The resulting spliced array
  */
 export const pureSplice = (array, start, deleteCount, ...items) => {
-  const newArray = [...array]
-  newArray.splice(start, deleteCount, ...items)
-  return newArray
-}
+  const newArray = [...array];
+  newArray.splice(start, deleteCount, ...items);
+  return newArray;
+};

@@ -1,11 +1,11 @@
-import Link from 'components/link/link'
-import LocaleContext from 'locales/localeContext'
-import { Fragment, useContext } from 'react'
-import css from './siteFooter.module.css'
-import Icon from 'components/icon/icon'
+import Link from 'components/link/link';
+import LocaleContext from 'locales/localeContext';
+import { Fragment, useContext } from 'react';
+import css from './siteFooter.module.css';
+import Icon from 'components/icon/icon';
 
 const SiteFooter = () => {
-  const locale = useContext(LocaleContext)
+  const locale = useContext(LocaleContext);
   return (
     <footer className={css.footer}>
       <small>{locale.copyright}</small>
@@ -27,7 +27,7 @@ const SiteFooter = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default SiteFooter
+export default SiteFooter;

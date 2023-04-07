@@ -1,4 +1,4 @@
-import { gqlMutate } from 'utilities'
+import { gqlMutate } from 'utilities';
 
 const addToDo = toDo => gqlMutate(`
   mutation AddToDo($toDo: ToDo) {
@@ -9,6 +9,6 @@ const addToDo = toDo => gqlMutate(`
   }
 `, {
   variables: { toDo },
-})
+});
 
-export default addToDo
+export default addToDo;

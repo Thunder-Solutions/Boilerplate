@@ -1,11 +1,11 @@
-import { getClassName } from 'utilities'
-import css from './label.module.css'
+import { getClassName } from 'utilities';
+import css from './label.module.css';
 
 const Label = ({ children, label = 'Form Field', inline = false, required = false, ...props }) => {
 
   const labelClass = getClassName({
     [css.inline]: inline,
-  }, css.label)
+  }, css.label);
 
   return (
     <label {...props} className={labelClass}>
@@ -19,7 +19,7 @@ const Label = ({ children, label = 'Form Field', inline = false, required = fals
       </span>
       {!inline ? <span>{children}</span> : <></>}
     </label>
-  )
-}
+  );
+};
 
-export default Label
+export default Label;

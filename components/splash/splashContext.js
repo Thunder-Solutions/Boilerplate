@@ -1,8 +1,8 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
 const SplashContext = createContext({
   src: '',
   characteristic: 'dark',
-})
+});
 
-export default SplashContext
+export default SplashContext;
