@@ -17,8 +17,8 @@ const Link = ({
 
   return (
     <span className={wrapperClass}>
-      <NextLink {...props}>
-        <a className={linkClass}>{children}</a>
+      <NextLink className={linkClass} {...props}>
+        {children}
       </NextLink>
     </span>
   );
