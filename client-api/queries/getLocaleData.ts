@@ -7,7 +7,7 @@ import { getJSON } from 'utilities';
  * @returns {Object} The JSON data containing text/url content in the requested language
  */
 const getLocaleData = (path, locale = 'en-US') => {
-  const global = path === 'global';
+  const global = String(path === 'global');
   const [group, id] = path.split('/');
   return getJSON('getLocaleData', { group, id, locale, global });
 };
