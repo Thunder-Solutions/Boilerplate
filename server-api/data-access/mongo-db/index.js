@@ -60,11 +60,12 @@ export default async () => {
           console.log(`seeding ${name}s...`)
           const savePromises = []
           for (const data of SEED_DATA[name]) {
-            savePromises.push(async () => {
+            const save = async () => {
               const Model = models[name]
               const model = new Model(data)
               return await model.save()
-            })
+            }
+            savePromises.push(save())
           }
           await Promise.all(savePromises)
         }
