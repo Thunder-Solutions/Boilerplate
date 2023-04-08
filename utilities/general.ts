@@ -136,7 +136,7 @@ export const parseVariables = (localeData, locale, variables) => {
  * @param {string} href - An absolute or relative URL path
  * @returns {URL} - A URL object created from the href passed in
  */
-export const getURL = (href, { relativeTo = 'current', basePath: _basePathOverride } = {}) => {
+export const getURL = (href, { relativeTo = 'current', basePath: _basePathOverride = '' } = {}) => {
   if (!href) return null;
   const absRegex = /^([^/]+?)\/\//;
   const isAbsolute = absRegex.test(href);
