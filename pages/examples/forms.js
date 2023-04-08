@@ -5,8 +5,8 @@ const FormsPage = ({ response }) => {
 
   const { locale, error } = response;
 
-  const handleTestForm = async data => {
-    await new Promise(resolve => setTimeout(() => resolve(), 1000));
+  const handleTestForm = async (data) => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 1000));
   };
 
   if (error) return <ErrorMessage error={error} />;

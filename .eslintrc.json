@@ -52,7 +52,13 @@
     ],
     "no-unused-vars": "off",
     "semi": ["error", "always"],
-    "semi-style": ["error", "last"]
+    "semi-style": ["error", "last"],
+    "arrow-parens": ["error", "always"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "overrides": [
     {

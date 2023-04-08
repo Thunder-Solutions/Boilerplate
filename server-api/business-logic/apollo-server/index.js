@@ -12,7 +12,7 @@ import {
 import jwt from 'jsonwebtoken';
 
 // join all schemas together in one string
-const getSchemas = module => {
+const getSchemas = (module) => {
   const values = Object.values(module);
   const usingStrings = typeof values[0] === 'string';
   const schemas = usingStrings ? values : values.map(({ schema }) => schema);
@@ -20,7 +20,7 @@ const getSchemas = module => {
 };
 
 // get resolvers as key/value pairs
-const getResolvers = module => Object.keys(module).reduce((resolvers, key) => {
+const getResolvers = (module) => Object.keys(module).reduce((resolvers, key) => {
   resolvers[key] = module[key].resolver;
   return resolvers;
 }, {});
