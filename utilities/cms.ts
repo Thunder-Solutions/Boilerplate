@@ -1,6 +1,7 @@
 import PropTypesOriginal, { Requireable } from 'prop-types';
 import { EMPTY, empty } from './constants';
 import { ReactElement } from 'react';
+import { GenericFn, GenericObj, ValueOf } from './types';
 
 /**
  * Used for mapping PropType method names to their corresponding types
@@ -19,10 +20,6 @@ const typeMap = {
   string: String,
   symbol: Symbol,
 };
-
-type GenericObj = { [key: string]: unknown };
-type GenericFn = (...args: unknown[]) => unknown;
-type ValueOf<T> = T[keyof T];
 
 /**
  * Decorates the PropTypes package with actual types so they can be extracted from outside the component
@@ -63,8 +60,11 @@ export const getPropTypeInfo = (propType: RequireableWithType<unknown>): { requi
   type: propType.type,
 });
 
-type Component = { propTypes?: GenericObj, name?: string } & ReactElement<unknown>;
-type PropTuple = [string, RequireableWithType<unknown>];
+export type PropType = {
+  [key: PropertyKey]: RequireableWithType<unknown>,
+};
+export type Component = { propTypes?: PropType, name?: string } & ReactElement<unknown>;
+export type PropTuple = [string, RequireableWithType<unknown>];
 
 /**
  * Get props which are available for the CMS to edit
@@ -86,11 +86,11 @@ export const getDefaultProps = (Component: Component): GenericObj => {
   return defaultPropState;
 };
 
-type CMSComponent = {
+export type CMSComponent = {
   id: string,
   Component: Component,
-  props: GenericObj,
-  childComponents: CMSComponent[],
+  props?: GenericObj,
+  childComponents?: CMSComponent[],
 };
 
 /**

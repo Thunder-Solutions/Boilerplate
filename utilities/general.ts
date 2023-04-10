@@ -1,3 +1,5 @@
+import { createRef } from 'react';
+
 /**
  * Apply classes dynamically based on boolean expressions
  * @param {Object.<string, boolean>} classMap - Each key is a class, and each value dictates whether to apply that class or not

@@ -1,9 +1,16 @@
-import Dialog from 'cmsComponents/dialog/dialog';
+import Dialog, { DialogProps } from 'cmsComponents/dialog/dialog';
 import Checkbox from 'cmsComponents/form/checkbox/checkbox';
 import Form from 'cmsComponents/form/form';
 import Input from 'cmsComponents/form/input/input';
-import { useState } from 'react';
-import { bool, getPropTypeInfo, NOOP, pascalToSpaces } from 'utilities';
+import { PropsWithChildren, useState } from 'react';
+import { bool, getPropTypeInfo, NOOP, pascalToSpaces, PropTuple } from 'utilities';
+import { GenericObj, ReactState } from 'utilities/types';
+
+type ComponentDialogProps = PropsWithChildren<{
+  cmsProps: PropTuple[],
+  propState: ReactState<GenericObj>,
+  onUpdateProps: (prop: string, value: string | number | boolean) => void,
+} & DialogProps>
 
 const ComponentDialog = ({
   children,
@@ -11,7 +18,7 @@ const ComponentDialog = ({
   propState = useState({}),
   onUpdateProps = NOOP,
   ...props
-}) => {
+}: ComponentDialogProps) => {
 
   return (
     <Dialog {...props}>
@@ -21,9 +28,9 @@ const ComponentDialog = ({
           const { required, type } = getPropTypeInfo(propType);
           const value = propState[prop];
           const updateHandlers = {
-            str: event => { onUpdateProps(prop, event.target.value); },
-            num: event => { onUpdateProps(prop, +event.target.value); },
-            bool: event => { onUpdateProps(prop, event.target.checked); },
+            str: (event: Event) => { onUpdateProps(prop, (event.target as HTMLInputElement).value); },
+            num: (event: Event) => { onUpdateProps(prop, +(event.target as HTMLInputElement).value); },
+            bool: (event: Event) => { onUpdateProps(prop, (event.target as HTMLInputElement).checked); },
           };
 
           const sharedInputProps = { label: pascalToSpaces(prop), value, required };

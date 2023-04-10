@@ -5,29 +5,35 @@ import Form from 'cmsComponents/form/form';
 import Select from 'cmsComponents/form/select/select';
 import Icon from 'cmsComponents/icon/icon';
 import { useState } from 'react';
-import { createComponent, NOOP, pureSplice } from 'utilities';
+import { CMSComponent, createComponent, NOOP, pureSplice } from 'utilities';
 import * as allComponents from 'components';
+import { ReactState } from 'utilities/types';
 
-const ComponentChildren = ({ componentState, onAdd = NOOP, ...props }) => {
+type ComponentChildrenProps = {
+  componentState?: ReactState<CMSComponent[]>,
+  onAdd: (component?: CMSComponent) => void,
+};
+
+const ComponentChildren = ({ componentState, onAdd = NOOP, ...props }: ComponentChildrenProps) => {
 
   // components state
-  const [components, setComponents] = componentState || useState([]);
+  const [components, setComponents] = componentState || useState<CMSComponent[]>([]);
   const [index, setIndex] = useState(components.length);
   const [fromComponent, setFromComponent] = useState(false);
 
   // dialog state
   const addDialogOpenState = useState(false);
   const setAddDialogOpen = addDialogOpenState[1];
-  const openAddDialog = (index, _fromComponent) => {
+  const openAddDialog = (index: number, fromComponent: boolean = false) => {
     setAddDialogOpen(true);
-    setFromComponent(_fromComponent ?? false);
-    if (typeof index === 'number') setIndex(index);
+    setFromComponent(fromComponent);
+    setIndex(index);
   };
   const closeAddDialog = () => { setAddDialogOpen(false); };
 
   // add a component
-  const handleAdd = (formData) => {
-    const componentName = formData.get('Component');
+  const handleAdd = (formData: FormData) => {
+    const componentName = formData.get('Component') as string;
     const Component = allComponents[componentName];
     console.log([...formData.entries()]);
     const addBelow = formData.get('add') === 'below';
@@ -38,6 +44,7 @@ const ComponentChildren = ({ componentState, onAdd = NOOP, ...props }) => {
     setComponents(newComponents);
     onAdd(newComponent);
     closeAddDialog();
+    return 'Successfully added component.';
   };
 
   return (

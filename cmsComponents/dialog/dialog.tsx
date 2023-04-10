@@ -1,12 +1,20 @@
 import css from './dialog.module.css';
 import DialogPolyfill from 'dialog-polyfill-universal';
-import { useEffect, useRef, useState } from 'react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { NOOP } from 'utilities';
 import Title from 'cmsComponents/title/title';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
+import { ReactState } from 'utilities/types';
 
-const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ...props }) => {
+export type DialogProps = PropsWithChildren<{
+  title: string
+  openState: ReactState<boolean>,
+  className?: string,
+  onClose?: (event: Event) => void,
+}>;
+
+const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ...props }: DialogProps) => {
 
   const dialogClass = `${className} ${css.dialog}`;
   const dialogRef = useRef(null);

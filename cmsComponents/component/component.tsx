@@ -1,9 +1,15 @@
 import ComponentDialog from 'cmsComponents/componentDialog/componentDialog';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
-import { useState } from 'react';
-import { getDefaultProps, NOOP, pascalToSpaces } from 'utilities';
+import { PropsWithChildren, useState } from 'react';
+import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTuple } from 'utilities';
 import css from './component.module.css';
+
+type ComponentProps = PropsWithChildren<{
+  Component: Component,
+  className?: string,
+  onAdd?: (component?: CMSComponent) => void,
+}>;
 
 const Component = ({
   children,
@@ -11,10 +17,10 @@ const Component = ({
   onAdd = NOOP,
   Component,
   ...props
-}) => {
+}: ComponentProps) => {
 
   const componentClass = `${className} ${css.component}`;
-  const cmsProps = Object.entries(Component.propTypes ?? {});
+  const cmsProps: PropTuple[] = Object.entries(Component.propTypes ?? {});
   const defaultPropState = getDefaultProps(Component);
   const [propState, setPropState] = useState(defaultPropState);
   const editDialogOpenState = useState(false);
@@ -59,7 +65,7 @@ const Component = ({
         openState={editDialogOpenState}
         title={`Edit ${pascalToSpaces(Component.name)}`}
         cmsProps={cmsProps}
-        propState={propState}
+        propState={[propState, setPropState]}
         onUpdateProps={updatePropState}
       />
       {children}
