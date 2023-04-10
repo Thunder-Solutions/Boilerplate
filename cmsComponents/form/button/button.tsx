@@ -1,8 +1,9 @@
 import Link from 'cmsComponents/link/link';
 import { getClassName } from 'utilities';
 import css from './button.module.css';
+import { ButtonProps } from 'utilities/types';
 
-const Button = ({ children, className = '', type = 'submit', ...props }) => {
+const Button = ({ children, className = '', type = 'submit', ...props }: ButtonProps) => {
 
   const buttonClass = getClassName({
     [css.primary]: type === 'submit',

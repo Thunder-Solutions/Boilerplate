@@ -1,14 +1,15 @@
 import Spinner from 'cmsComponents/spinner/spinner';
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { getClassName } from 'utilities';
 import css from './form.module.css';
 import { DEFAULT_FORM_STATE, DEFAULT_SUBMIT, FormContext } from './formUtilities';
+import { FormProps } from 'utilities/types';
 
-export type FormProps = PropsWithChildren<{
+export type FormComponentProps = FormProps & {
   onSubmit?: (formData: FormData) => string | Promise<string>,
-}>;
+};
 
-const Form = ({ children, onSubmit = DEFAULT_SUBMIT }: FormProps) => {
+const Form = ({ children, onSubmit = DEFAULT_SUBMIT }: FormComponentProps) => {
   const [formState, setFormState] = useState(DEFAULT_FORM_STATE);
   const [loading, setLoading] = useState(false);
   const { valid, validated, validationMessage } = formState;
