@@ -1,25 +1,40 @@
 use std::error::Error;
 
-use mongodb::{
-    options::{ClientOptions, ResolverConfig},
-    Client,
-};
+use async_graphql::{EmptySubscription, Schema};
+use axum::{routing::get, Router, Server};
+use data_access::model::get_connection;
+use gql::SchemaType;
+
+use crate::gql::{graphiql, graphql_handler, mutations::Mutation, queries::Query};
 
 pub mod api;
 pub mod error;
+pub mod gql;
 pub mod model;
+
+#[derive(Clone)]
+pub struct AppState {
+    pub schema: SchemaType,
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // Load the MongoDB connection string from an environment variable:
-    let client_uri =
-        std::env::var("MONGODB_URI").expect("You must set the MONGODB_URI environment var!");
+    let schema = Schema::build(Query, Mutation, EmptySubscription)
+        .data(get_connection().await)
+        .limit_complexity(5000)
+        .finish();
 
-    // A Client is needed to connect to MongoDB:
-    // An extra line of code to work around a DNS issue on Windows:
-    let options =
-        ClientOptions::parse_with_resolver_config(&client_uri, ResolverConfig::cloudflare())
-            .await?;
-    let client = Client::with_options(options)?;
+    let state = AppState { schema };
+
+    let app = Router::new()
+        .route("/", get(graphiql).post(graphql_handler))
+        .with_state(state);
+
+    println!("GraphiQL IDE: http://localhost:8000");
+
+    Server::bind(&"127.0.0.1:8000".parse().unwrap())
+        .serve(app.into_make_service())
+        .await?;
+
     Ok(())
 }
