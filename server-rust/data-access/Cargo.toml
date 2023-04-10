@@ -1,0 +1,19 @@
+[package]
+name = "data-access"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bson = "2.6.1"
+chrono = "0.4.24"
+dotenvy = "0.15.7"
+mongodb = "2.4.0"
+serde = "1.0.159"
+thiserror = "1.0.40"
+tokio = "1.27.0"
+axum = "0.6.12"
+async-graphql-axum = "5.0.7"
+async-graphql = "5.0.7"
+utilities = {path = "../utilities"}

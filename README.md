@@ -1,41 +1,70 @@
 # BOILERPLATE THEME
 
-This project is intended to be customized and reused as a template for clients of [Thunder Solutions](https://thunder.solutions).  It includes fundamental implementations and features, reducing future repetitive set-up so we can hit the ground running with new clients.
+This project is intended to be customized and reused as a ready-made website template.  It includes fundamental implementations and features, reducing future repetitive set-up so you can hit the ground running with new projects.
 
 Each folder contains a `README.md` file which should be reviewed before contributing, and which contains standards we should be reviewing against when approving or denying pull requests.
 
-This project uses [jsdoc](https://jsdoc.app/) comments for documentation, and potentially for TypeScript type checking without the full commitment to the TypeScript syntax.  These comments also assist with intellisense, so we can read more about the functions we're calling without opening a dozen tabs.
+This project uses [jsdoc](https://jsdoc.app/) comments for documentation, and potentially for TypeScript type checking without the full commitment to the TypeScript syntax.  These comments also assist with intellisense and more useful hints.
+
+NOTE: Moving to TypeScript is currently in consideration.
 
 ---
 
 ## TECH STACK
 
->This section will be updated as more of the main architecture is set in motion.
-
-- [Docker](https://www.docker.com)
+- [Docker](https://www.docker.com) to maintain consistency with all environments
 - [Next.js](https://nextjs.org/) (React.js + Node.js)
+- [Jest](https://jestjs.io/)
+- [ESLint](https://eslint.org/) based on [StandardJS](https://standardjs.com/) rules with some customizations
+- [Husky](https://typicode.github.io/husky/#/) (runs linters and tests on commit)
+- [Mongo](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/docs/)
+- [Apollo GraphQL](https://www.apollographql.com/)
+- [Node JSON Web Token](https://github.com/auth0/node-jsonwebtoken#readme) for authentication/authorization
+- [Nodemailer](https://nodemailer.com/about/) for automated emails
+
+---
+
+## ARCHITECTURE
+
+Read each directory's respective `README.md` file before contributing.
+
+- API
+  - [Client](client-api)
+  - [Server](server-api)
+    - Business Logic
+    - Data Access
+- React Components
+  - [Website Components](components)
+  - [CMS Components](cmsComponents)
+    ```diff
+    ! The CMS is not yet fully implemented.  It is currently under development.
+    ```
+  - [Pages](pages)
+- [Locales](locales)
+- [Utilities](utilities)
+  ```diff
+  ! Needs more tests written, then we should contribute with TDD from now on.
+  ```
 
 ---
 
 ## ENVIRONMENT SETUP
 
->This section will be updated as more of the main architecture is set in motion.
-
 ### Dependencies
 
 - This project relies on Docker containers, so you'll need to make sure [Docker Desktop](https://www.docker.com/get-started/) is installed and running prior to setting up.
 
-- This project was designed with the [VS Code](https://code.visualstudio.com/download) text editor in mind.  Between the `.vscode` and `.devcontainer` directories, you will already have everything you need to get running.  On Windows, the [`Remote - WSL` extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) is strongly encouraged to work with this codebase as it was intended.
+- This project was designed with the [VS Code](https://code.visualstudio.com/download) text editor in mind.  Between the `.vscode` and `.devcontainer` directories, you will already have everything you need to get running.  On Windows, the [`Remote - WSL`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension is strongly encouraged to work with this codebase as it was intended.
 
 - If you're running a Windows machine, you'll need to install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) and clone this repo into your Linux root.  Open Powershell and type the following command to install WSL.
-    ```
-    wsl --install
-    ```
-    >NOTE: If you want to use Windows explorer to view folders in WSL, you can do so by manually typing `\\wsl$` into the path.  If your chosen distro was Ubuntu, the full path of your home folder would be `\\wsl$\Ubuntu\home\<user>` where `<user>` is whatever username you set up.
-
-- You need to make sure you install a distro for WSL. The recomended distro is Ubuntu, you can install it through the Microsoft store. [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9pdxgncfsczv)
-
-- After you install Ubuntu you need to activate WSL within Docker Desktop. That is done under Settings -> Resources -> WSL Integration. You need to both enable the integration, and make sure the distro you installed is also selected. (If you chose to install the above distro is should be Ubuntu)
+  ```
+  wsl --install
+  ```
+  - You must install a distro for WSL - [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9pdxgncfsczv) is recommended. You can install it through the Microsoft store.
+  - Activate WSL in Docker Desktop by navigating to `Settings -> Resources -> WSL Integration`. Enable the integration, and make sure the distro you installed is selected.
+  >NOTE: If you want to use Windows explorer to view folders in WSL, you can do so by manually typing `\\wsl$` into the path.  If your chosen distro was Ubuntu, the full path of your home folder would be `\\wsl$\Ubuntu\home\<your username here>`.
+  >
+  > If you are unable to access the folder, try running WSL from the Windows search bar and then try again.
 
 ### Cloning the Repository
 
@@ -55,7 +84,7 @@ This project uses [jsdoc](https://jsdoc.app/) comments for documentation, and po
 
 ### Development
 
-- Before writing any code, the first thing you'll want to do is choose [reopen folder in container](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container) from the bottom-left corner, or hit `ctrl+shift+p` and choose the option.  *Docker Desktop must be running for this to work.*
+- Before writing any code, the first thing you'll want to do in VSCode is choose [reopen folder in container](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container) from the bottom-left corner, or hit `ctrl+shift+p` and choose the option.  *Docker Desktop must be running for this to work.*
     >NOTE: This may take a few minutes the first time.  Once the Docker image has been created, it will be cached so it won't take as long the next time.
 - The best way to serve your local environment is to use the [Run and Debug](https://code.visualstudio.com/docs/editor/debugging) tab on the far left toolbar menu.  This was configured with `.vscode/launch.json` so you can add debug points from inside VSCode.
 
