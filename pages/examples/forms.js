@@ -1,4 +1,4 @@
-import { Container, ErrorMessage, Group, Head, Page, PageTitle, Form, Input, Content, Button, Textarea, Fieldset, Select } from 'components';
+import { Container, ErrorMessage, Group, Head, Page, PageHeading, Form, Input, Content, Button, Textarea, Fieldset, Select } from 'components';
 import { getLocaleData } from 'client-api';
 
 const FormsPage = ({ response }) => {
@@ -14,7 +14,7 @@ const FormsPage = ({ response }) => {
   return (
     <Page id="To Dos">
       <Head/>
-      <PageTitle title={locale.pageTitle} />
+      <PageHeading title={locale.pageTitle} />
       <Container>
         <Group>
           <Content>{locale.content}</Content>

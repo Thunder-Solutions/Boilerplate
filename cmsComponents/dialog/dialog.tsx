@@ -2,7 +2,7 @@ import css from './dialog.module.css';
 import DialogPolyfill from 'dialog-polyfill-universal';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { NOOP } from 'utilities';
-import Title from 'cmsComponents/title/title';
+import Heading from 'cmsComponents/heading/heading';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
 import { ReactState } from 'utilities/types';
@@ -29,7 +29,7 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
   // and does NOT need to be rerun multiple times.
   useEffect(() => {
     DialogPolyfill.registerDialog(dialogRef.current);
-    const handleEsc = event => {
+    const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Esc' || event.key === 'Escape') {
         event.preventDefault();
         close();
@@ -60,7 +60,7 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
   return (
     <dialog {...props} className={dialogClass} ref={dialogRef}>
       <header className={css.header}>
-        <Title className={css.title}>{title}</Title>
+        <Heading className={css.title}>{title}</Heading>
         <Button className={css.closeButton} onClick={close}>
           <Icon type="Close" />
         </Button>

@@ -2,7 +2,7 @@ import css from './dialog.module.css';
 import DialogPolyfill from 'dialog-polyfill-universal';
 import { useEffect, useRef, useState } from 'react';
 import { NOOP } from 'utilities';
-import Title from 'components/title/title';
+import Heading from'components/heading/heading';
 import Button from 'components/form/button/button';
 import Icon from 'components/icon/icon';
 
@@ -55,7 +55,7 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
   return (
     <dialog {...props} className={dialogClass} ref={dialogRef}>
       <header className={css.header}>
-        <Title className={css.title}>{title}</Title>
+        <Heading className={css.title}>{title}</Heading>
         <Button className={css.closeButton} onClick={close}>
           <Icon type="Close" />
         </Button>

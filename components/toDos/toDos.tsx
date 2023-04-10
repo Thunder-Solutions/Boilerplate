@@ -1,6 +1,6 @@
 import css from './toDos.module.css';
 import withAPI from '../withAPI/withAPI';
-import Title from 'components/title/title';
+import Heading from'components/heading/heading';
 import Content from 'components/content/content';
 
 const ToDos = withAPI({
@@ -10,7 +10,7 @@ const ToDos = withAPI({
     <div className={css.toDos}>
       {response.toDos.map(({ _id, title, description }) => (
         <div key={_id} className={css.toDo}>
-          <Title>{title}</Title>
+          <Heading>{title}</Heading>
           <Content>{description}</Content>
         </div>
       ))}
