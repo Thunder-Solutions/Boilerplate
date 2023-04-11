@@ -3,9 +3,7 @@ import Icon from 'cmsComponents/icon/icon';
 import css from './page.module.css';
 import { DivTagProps } from 'utilities/types';
 
-export type NavLinkProps = {
-  icon: string,
-} & ButtonLinkProps;
+type NavLinkProps = { icon: string } & ButtonLinkProps;
 
 const NavLink = ({ children, icon, ...props }: NavLinkProps) => <div>
   <Button.Link {...props} wrapperClass={css.cmsNavLinkWrapper} className={css.cmsNavLink}>
@@ -14,7 +12,9 @@ const NavLink = ({ children, icon, ...props }: NavLinkProps) => <div>
   </Button.Link>
 </div>;
 
-const Page = ({ children, className = '', ...props }: DivTagProps) => {
+export type PageProps = DivTagProps;
+
+const Page = ({ children, className = '', ...props }: PageProps) => {
 
   const pageClass = `${className} ${css.page}`;
 

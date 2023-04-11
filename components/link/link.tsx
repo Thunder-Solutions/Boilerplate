@@ -1,6 +1,25 @@
 import css from './link.module.css';
-import NextLink from 'next/link';
+import NextLink, { LinkProps } from 'next/link';
+import { RefAttributes } from 'react';
 import { bool, getClassName } from 'utilities';
+import { AnchorTagProps } from 'utilities/types';
+
+export type LinkComponentProps = {
+  /**
+   * To override the styles on the link wrapper
+   */
+  wrapperClass: string,
+  /**
+   * Changes the layout behavior of the link
+   * @defaultValue `true`
+   */
+  inline?: boolean,
+  /**
+   * May be set to `"none"` to strip the visual indicators of the underlying link. This can be particularly useful for wrapping images.
+   * @defaultValue `"default"`
+   */
+  type?: 'default' | 'none',
+} & Omit<AnchorTagProps, keyof LinkProps> & LinkProps & RefAttributes<HTMLAnchorElement>;
 
 const Link = ({
   children,
@@ -9,7 +28,7 @@ const Link = ({
   inline = true,
   type = 'default',
   ...props
-}) => {
+}: LinkComponentProps) => {
 
   const wrapperClass = getClassName({ [css.standalone]: !bool(inline) }, css.linkWrapper, _wrapperClass);
   const linkClass = getClassName({ [css[type]]: !!css[type] }, css.link, className);

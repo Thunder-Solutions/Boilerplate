@@ -2,11 +2,19 @@ import css from './dialog.module.css';
 import DialogPolyfill from 'dialog-polyfill-universal';
 import { useEffect, useRef, useState } from 'react';
 import { NOOP } from 'utilities';
-import Heading from'components/heading/heading';
+import Heading from 'components/heading/heading';
 import Button from 'components/form/button/button';
 import Icon from 'components/icon/icon';
+import { DialogTagProps, ReactState } from 'utilities/types';
 
-const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ...props }) => {
+export type DialogComponentProps = {
+  title: string
+  openState: ReactState<boolean>,
+  className?: string,
+  onClose?: (event: Event) => void,
+} & DialogTagProps;
+
+const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ...props }: DialogComponentProps) => {
 
   const dialogClass = `${className} ${css.dialog}`;
   const dialogRef = useRef(null);
@@ -21,7 +29,7 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
   // and does NOT need to be rerun multiple times.
   useEffect(() => {
     DialogPolyfill.registerDialog(dialogRef.current);
-    const handleEsc = event => {
+    const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Esc' || event.key === 'Escape') {
         event.preventDefault();
         close();
@@ -47,9 +55,6 @@ const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ..
       dialogRef.current.close();
       document.documentElement.style.overflow = 'auto';
     }
-    return () => {
-      document.documentElement.style.overflow = 'auto';
-    };
   }, [open, dialogRef]);
 
   return (

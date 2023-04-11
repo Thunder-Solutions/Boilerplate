@@ -1,4 +1,4 @@
-import Heading from'components/heading/heading';
+import Heading from 'cmsComponents/heading/heading';
 import css from './pageHeading.module.css';
 
 export type PageHeadingProps = {

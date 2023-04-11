@@ -1,9 +1,12 @@
+import { DivTagProps } from 'utilities/types';
 import css from './page.module.css';
 import { SiteFooter, SiteHeader } from 'components';
 
-const Page = ({ children, id }) => {
+export type PageProps = DivTagProps;
+
+const Page = ({ children, id, ...props }: PageProps) => {
   return (
-    <div className={css.page} id={id}>
+    <div {...props} className={css.page} id={id}>
       <SiteHeader pageId={id} />
       <main>{children}</main>
       <SiteFooter/>
