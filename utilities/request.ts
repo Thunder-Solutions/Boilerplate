@@ -1,25 +1,32 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloCache, ApolloClient, DefaultContext, InMemoryCache, MutationOptions, OperationVariables, QueryOptions, gql } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { checkType, getURL } from './general';
+import { GenericObj } from './types';
 
 // set up the Apollo Client
 const client = new ApolloClient({
-  link: createUploadLink({ uri: getURL('/api/graphql', { relativeTo: 'origin' }) }),
+  link: createUploadLink({ uri: getURL('/api/graphql', { relativeTo: 'origin' }).href }),
   cache: new InMemoryCache(),
 });
 
+type GQLQueryOptions = QueryOptions<OperationVariables, any>;
+type GQLMutationOptions = MutationOptions<any, OperationVariables, DefaultContext, ApolloCache<any>>;
+type GQLOptions = GQLQueryOptions | GQLMutationOptions;
+
+type GQLResponse = {
+  request: Promise<unknown>,
+  abortController: AbortController,
+}
+
 /**
  * Wraps a GraphQL query in a promise with Abort logic and error handling
- * @param {unknown} options - The query options
- * @returns {{request: Promise<unknown>, abortController: AbortController}} The promise and corresponding abort controller
  */
-const gqlRequest = (options = {}) => {
+const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
   const action = 'mutation' in options ? 'mutate' : 'query';
   const result = 'mutation' in options ? 'mutation' : 'query';
 
   // create abort controller to handle cancelled requests
-  const abortExists = !checkType(AbortController, 'undefined');
-  const abortController = abortExists ? new AbortController() : { signal: null };
+  const abortController = new AbortController();
   const { signal } = abortController;
 
   // build graphql request options
@@ -37,7 +44,9 @@ const gqlRequest = (options = {}) => {
   // wrap the request in a promise to handle cancelled requests
   const request = new Promise((resolve, reject) => {
     if (signal) signal.onabort = () => { reject(new Error('The operation was aborted')); };
-    client[action](_options).then(response => {
+
+    // TODO: fix the type problems with client
+    (client as any)[action](_options).then(response => {
       if (typeof response === 'undefined') {
         throw new Error('The GraphQL client resolved an undefined value. Check the network tab to see if it made a request.');
       }
@@ -93,13 +102,9 @@ const gqlRequest = (options = {}) => {
 };
 
 /**
- * A utility that shortens Apollo queries by abstracting
- * redundant options away from the foreground
- * @param {string} query - The Apollo GraphQL query
- * @param {unknown} options - The rest of the query options
- * @returns {{request: Promise<unknown>, abortController: AbortController}} The promise and corresponding abort controller
+ * A utility that shortens Apollo queries by abstracting redundant options away from the foreground
  */
-export const gqlQuery = (query, options = {}) => gqlRequest({ ...options, query: gql`${query}` });
+export const gqlQuery = (query: string, options: Partial<GQLQueryOptions> = {}): GQLResponse => gqlRequest({ ...options, query: gql`${query}` });
 
 /**
  * A utility that shortens Apollo mutations by abstracting
@@ -108,15 +113,12 @@ export const gqlQuery = (query, options = {}) => gqlRequest({ ...options, query:
  * @param {unknown} options - The rest of the query options
  * @returns {{request: Promise<unknown>, abortController: AbortController}} The promise and corresponding abort controller
  */
-export const gqlMutate = (mutation, options = {}) => gqlRequest({ ...options, mutation: gql`${mutation}` });
+export const gqlMutate = (mutation: string, options: Partial<GQLMutationOptions> = {}): GQLResponse => gqlRequest({ ...options, mutation: gql`${mutation}` });
 
 /**
  * A convenient GET call for JSON responses
- * @param  {string} endpoint - The name of the endpoint - "/api/" is automatically prepended
- * @param  {Object.<string, string>} query - Key/value mappings to convert to query parameters
- * @returns {Object.<string, unknown>} The JSON data from the endpoint
  */
-export const getJSON = (endpoint, query = {}) => {
+export const getJSON = (endpoint: string, query: GenericObj<string> = {}): unknown => {
 
   // create abort controller to handle cancelled requests
   const abortExists = !checkType(AbortController, 'undefined');
@@ -146,7 +148,7 @@ export const getJSON = (endpoint, query = {}) => {
         }
         resolve(json);
       } catch (err) {
-        console.warn(`Invalid JSON response from ${getURL(url)} - Parsing response as plain text instead...`);
+        console.warn(`Invalid JSON response from ${getURL(url.href)} - Parsing response as plain text instead...`);
         const text = await response.text();
         console.warn(
           {

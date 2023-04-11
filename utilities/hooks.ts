@@ -22,7 +22,7 @@ export const useDarkMode = <T>({ dark, light }: DarkModePref<T>): T => {
 /**
  * Encapsulated useState which updates the theme as a class name on the document element.
  */
-export const useTheme = (): [ string, (theme: string) => void]  => {
+export const useTheme = (): [string, (theme: string) => void]  => {
   const [theme, setTheme] = useState('base');
 
   // get the initial theme value and watch it for changes
