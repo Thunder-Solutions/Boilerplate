@@ -1,11 +1,10 @@
 import css from './dialog.module.css';
 import DialogPolyfill from 'dialog-polyfill-universal';
 import { useEffect, useRef, useState } from 'react';
-import { NOOP } from 'utilities';
+import { NOOP, DialogTagProps, ReactState } from 'utilities';
 import Heading from 'cmsComponents/heading/heading';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
-import { DialogTagProps, ReactState } from 'utilities/types';
 
 export type DialogComponentProps = {
   title: string

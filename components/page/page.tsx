@@ -1,4 +1,4 @@
-import { DivTagProps } from 'utilities/types';
+import { DivTagProps } from 'utilities';
 import css from './page.module.css';
 import { SiteFooter, SiteHeader } from 'components';
 

@@ -5,9 +5,8 @@ import Form from 'cmsComponents/form/form';
 import Select from 'cmsComponents/form/select/select';
 import Icon from 'cmsComponents/icon/icon';
 import { useState } from 'react';
-import { CMSComponent, createComponent, NOOP, pureSplice } from 'utilities';
+import { CMSComponent, createComponent, NOOP, pureSplice, ReactState } from 'utilities';
 import * as allComponents from 'components';
-import { ReactState } from 'utilities/types';
 
 export type ComponentChildrenProps = {
   componentState?: ReactState<CMSComponent[]>,

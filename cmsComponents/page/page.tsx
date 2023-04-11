@@ -1,7 +1,7 @@
 import Button, { ButtonLinkProps } from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
 import css from './page.module.css';
-import { DivTagProps } from 'utilities/types';
+import { DivTagProps } from 'utilities';
 
 type NavLinkProps = { icon: string } & ButtonLinkProps;
 

@@ -1,4 +1,4 @@
-import { FieldsetTagProps } from 'utilities/types';
+import { FieldsetTagProps } from 'utilities';
 import css from './fieldset.module.css';
 
 export type FieldsetComponentProps = FieldsetTagProps & {

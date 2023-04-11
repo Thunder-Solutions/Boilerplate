@@ -2,9 +2,8 @@ import ComponentDialog from 'cmsComponents/componentDialog/componentDialog';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
 import { useState } from 'react';
-import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTuple } from 'utilities';
+import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTuple, DivTagProps } from 'utilities';
 import css from './component.module.css';
-import { DivTagProps } from 'utilities/types';
 
 export type ComponentProps = {
   Component: Component,

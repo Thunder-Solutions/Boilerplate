@@ -1,6 +1,5 @@
-import { getClassName } from 'utilities';
+import { getClassName, LabelTagProps } from 'utilities';
 import css from './label.module.css';
-import { LabelTagProps } from 'utilities/types';
 
 export type LabelComponentProps = {
   label?: string,

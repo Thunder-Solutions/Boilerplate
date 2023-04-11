@@ -3,8 +3,7 @@ import Checkbox from 'cmsComponents/form/checkbox/checkbox';
 import Form from 'cmsComponents/form/form';
 import Input from 'cmsComponents/form/input/input';
 import { useState } from 'react';
-import { bool, getPropTypeInfo, NOOP, pascalToSpaces, PropTuple } from 'utilities';
-import { GenericObj, ReactState } from 'utilities/types';
+import { bool, getPropTypeInfo, NOOP, pascalToSpaces, PropTuple, GenericObj, ReactState } from 'utilities';
 
 export type ComponentDialogProps = {
   cmsProps: PropTuple[],

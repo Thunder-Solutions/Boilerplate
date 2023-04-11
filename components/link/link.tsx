@@ -1,8 +1,7 @@
 import css from './link.module.css';
 import NextLink, { LinkProps } from 'next/link';
 import { RefAttributes } from 'react';
-import { bool, getClassName } from 'utilities';
-import { AnchorTagProps } from 'utilities/types';
+import { bool, getClassName, AnchorTagProps } from 'utilities';
 
 export type LinkComponentProps = {
   /**

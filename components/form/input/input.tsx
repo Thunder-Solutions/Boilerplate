@@ -1,8 +1,7 @@
 import css from './input.module.css';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
-import { NOOP } from 'utilities';
-import { InputTagProps } from 'utilities/types';
+import { NOOP, InputTagProps } from 'utilities';
 import { ChangeEventHandler } from 'react';
 
 export type InputComponentProps = PropsWithLabel<{

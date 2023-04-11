@@ -1,9 +1,8 @@
 import Spinner from 'cmsComponents/spinner/spinner';
 import { useState } from 'react';
-import { getClassName } from 'utilities';
+import { getClassName, FormTagProps } from 'utilities';
 import css from './form.module.css';
 import { DEFAULT_FORM_STATE, DEFAULT_SUBMIT, FormContext } from './formUtilities';
-import { FormTagProps } from 'utilities/types';
 
 export type FormComponentProps = {
   onSubmit?: (formData: FormData) => string | Promise<string>,

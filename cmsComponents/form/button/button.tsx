@@ -1,7 +1,6 @@
 import Link, { LinkComponentProps } from 'cmsComponents/link/link';
-import { getClassName } from 'utilities';
+import { getClassName, ButtonTagProps } from 'utilities';
 import css from './button.module.css';
-import { ButtonTagProps } from 'utilities/types';
 import { PropsWithChildren } from 'react';
 
 export type ButtonComponentProps = ButtonTagProps;

@@ -1,9 +1,8 @@
 import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
-import { NOOP } from 'utilities';
+import { NOOP, InputTagProps } from 'utilities';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './checkbox.module.css';
-import { InputTagProps } from 'utilities/types';
 
 export type CheckboxComponentProps = PropsWithLabel<InputTagProps>;
 

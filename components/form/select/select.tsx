@@ -1,9 +1,8 @@
 import Icon from 'cmsComponents/icon/icon';
-import { NOOP } from 'utilities';
+import { NOOP, SelectTagProps } from 'utilities';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './select.module.css';
-import { SelectTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
 export type SelectComponentProps = PropsWithLabel<SelectTagProps>;
