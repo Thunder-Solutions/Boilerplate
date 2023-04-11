@@ -5,4 +5,4 @@ export * from './hooks';
 export * from './request';
 export * from './auth';
 export * from './cms';
-export * from './types';
+export * from './types.d';
