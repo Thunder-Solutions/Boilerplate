@@ -1,16 +1,16 @@
-import Dialog, { DialogProps } from 'cmsComponents/dialog/dialog';
+import Dialog, { DialogComponentProps } from 'cmsComponents/dialog/dialog';
 import Checkbox from 'cmsComponents/form/checkbox/checkbox';
 import Form from 'cmsComponents/form/form';
 import Input from 'cmsComponents/form/input/input';
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { bool, getPropTypeInfo, NOOP, pascalToSpaces, PropTuple } from 'utilities';
 import { GenericObj, ReactState } from 'utilities/types';
 
-type ComponentDialogProps = PropsWithChildren<{
+type ComponentDialogProps = {
   cmsProps: PropTuple[],
   propState: ReactState<GenericObj>,
   onUpdateProps: (prop: string, value: string | number | boolean) => void,
-} & DialogProps>
+} & DialogComponentProps;
 
 const ComponentDialog = ({
   children,

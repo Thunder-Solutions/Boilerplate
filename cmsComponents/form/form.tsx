@@ -5,9 +5,9 @@ import css from './form.module.css';
 import { DEFAULT_FORM_STATE, DEFAULT_SUBMIT, FormContext } from './formUtilities';
 import { FormProps } from 'utilities/types';
 
-export type FormComponentProps = FormProps & {
+export type FormComponentProps = {
   onSubmit?: (formData: FormData) => string | Promise<string>,
-};
+} & FormProps;
 
 const Form = ({ children, onSubmit = DEFAULT_SUBMIT }: FormComponentProps) => {
   const [formState, setFormState] = useState(DEFAULT_FORM_STATE);

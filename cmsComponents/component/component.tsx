@@ -1,15 +1,16 @@
 import ComponentDialog from 'cmsComponents/componentDialog/componentDialog';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTuple } from 'utilities';
 import css from './component.module.css';
+import { DivProps } from 'utilities/types';
 
-type ComponentProps = PropsWithChildren<{
+type ComponentProps = {
   Component: Component,
   className?: string,
   onAdd?: (component?: CMSComponent) => void,
-}>;
+} & DivProps;
 
 const Component = ({
   children,
