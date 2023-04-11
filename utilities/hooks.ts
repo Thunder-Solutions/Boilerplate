@@ -2,12 +2,15 @@ import { NOOP } from './constants';
 import { useState, useEffect, useRef } from 'react';
 import * as Queries from 'client-api';
 
+type DarkModePref<T> = {
+  dark: T,
+  light: T,
+};
+
 /**
  * Returns a value based on whether the system preference is set to dark or light mode.
- * @param {{ dark: unknown, light: unknown }} valueMap - Value mappings for dark and light mode
- * @returns {unknown} Whichever value corresponds to the system preference for dark/light mode
  */
-export const useDarkMode = ({ dark, light }) => {
+export const useDarkMode = <T>({ dark, light }: DarkModePref<T>): T => {
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
     setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
