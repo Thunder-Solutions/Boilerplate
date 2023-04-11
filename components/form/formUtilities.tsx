@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, createRef, useContext } from 'react';
-import { createContextState, useContextState, NOOP, getClassName } from 'utilities';
+import { useState, useEffect, useRef, useContext, FocusEventHandler } from 'react';
+import { createContextState, NOOP, getClassName } from 'utilities';
 import css from './formValidation.module.css';
 
 export const DEFAULT_FORM_STATE = {
@@ -10,19 +10,29 @@ export const DEFAULT_FORM_STATE = {
 
 export const FormContext = createContextState(DEFAULT_FORM_STATE);
 
-export const DEFAULT_SUBMIT = data => {
+export const DEFAULT_SUBMIT = (data: FormData) => {
   console.group('Form submitted without a handler.');
   console.log('Form Data:', [...data.entries()]);
   console.groupEnd();
+  return 'The form was submitted.';
 };
+
+type ValidationProps = {
+  className?: string,
+  getValidityMessage?: (value?: string) => string,
+  onBlur?: FocusEventHandler,
+}
+
+type ValidationArgs = {
+  props: ValidationProps,
+  inputClass?: string,
+  inputArr?: HTMLInputElement[],
+}
 
 /**
  * Get validation helpers for custom validation.
- * @param {function} validation - This callback should return a string to set a custom validity message on an input.
- * @param {Array.<Object>} inputArr - A list of inputs to which validation will apply.
- * @returns {Object} - A module containing validation helpers.
  */
-export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [] }) => {
+export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [] }: ValidationArgs) => {
 
   const {
     className: _className = '',
@@ -33,8 +43,8 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
   const [validated, setValidated] = useState(false);
   const [touched, setTouched] = useState(false);
   const [dirty, setDirty] = useState(false);
-  const inputRef = useRef(null);
-  const inputRefs = useRef(inputArr.map(createRef));
+  const inputRef = useRef<HTMLInputElement>();
+  const inputRefs = useRef<HTMLInputElement[]>(inputArr);
 
   const inputState = {
     touched,
@@ -51,25 +61,24 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
   }, css.control, inputClass, _className);
 
   const checkValidity = () => {
-    const checkInputRef = inputRef => {
-      const input = inputRef.current;
+    const checkInputRef = (input: HTMLInputElement) => {
       const inputIsCheckable = Object.prototype.hasOwnProperty.call(input, 'checked');
       if (inputIsCheckable && !input.checked) return input.setCustomValidity('');
       const validityMessage = getValidityMessage(input.value);
       input.setCustomValidity(validityMessage);
     };
-    if (inputRef.current) checkInputRef(inputRef);
+    if (inputRef.current) checkInputRef(inputRef.current);
     else inputRefs.current.forEach(checkInputRef);
   };
 
-  const validate = event => {
-    const { value } = event.currentTarget;
+  const validate = (event: Event) => {
+    const { value } = event.currentTarget as HTMLInputElement;
     setDirty(!!value && value !== '');
     if (inputRef.current) inputRef.current.setCustomValidity('');
-    else inputRefs.current.forEach(inputRef => inputRef.current.setCustomValidity(''));
+    else inputRefs.current.forEach(input => input.setCustomValidity(''));
   };
 
-  const handleBlur = event => {
+  const handleBlur: FocusEventHandler = (event) => {
     checkValidity();
     setTouched(true);
     onBlur(event);
@@ -90,3 +99,5 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
     validate,
   };
 };
+
+export type PropsWithLabel<P> = P & { label?: string };

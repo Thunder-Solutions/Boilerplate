@@ -1,6 +1,11 @@
+import { FieldsetTagProps } from 'utilities/types';
 import css from './fieldset.module.css';
 
-const Fieldset = ({ children, className = '', legend = 'Section', ...props }) => {
+export type FieldsetComponentProps = FieldsetTagProps & {
+  legend?: string,
+};
+
+const Fieldset = ({ children, className = '', legend = 'Section', ...props }: FieldsetComponentProps) => {
 
   const fieldsetClass = `${className} ${css.fieldset}`;
 

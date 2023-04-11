@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
 import { NOOP } from 'utilities';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
@@ -35,7 +35,7 @@ const Checkbox = (props: CheckboxComponentProps) => {
   };
 
   const toggleChecked = () => { setChecked(!checked); };
-  const handleKeyDown = event => {
+  const handleKeyDown: KeyboardEventHandler = (event) => {
     if (event.key === ' ') toggleChecked();
   };
 

@@ -1,13 +1,19 @@
 import css from './textarea.module.css';
-import { getValidationHelpers } from '../formUtilities';
+import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import { NOOP } from 'utilities';
+import { TextareaTagProps } from 'utilities/types';
+import { ChangeEventHandler } from 'react';
 
-const Textarea = ({ children, ...props }) => {
+export type TextareaComponentProps = PropsWithLabel<{
+  autoFormat?: (value: string) => string,
+} & TextareaTagProps>;
+
+const Textarea = ({ children, ...props }: TextareaComponentProps) => {
 
   // not destructuring above because we want to pass all props around
   const {
-    autoFormat = v => v,
+    autoFormat = (v: string): string => v,
     onInput = NOOP,
     label = '',
     required = false,
@@ -23,9 +29,9 @@ const Textarea = ({ children, ...props }) => {
     inputClass: css.textarea,
   });
 
-  const handleInput = event => {
+  const handleInput: ChangeEventHandler = event => {
     inputRef.current.value = autoFormat(inputRef.current.value);
-    validate(event);
+    validate(event.nativeEvent);
     onInput(event);
   };
 

@@ -1,8 +1,12 @@
-import Link from 'components/link/link';
+import Link, { LinkComponentProps } from 'components/link/link';
 import { getClassName } from 'utilities';
 import css from './button.module.css';
+import { ButtonTagProps } from 'utilities/types';
+import { PropsWithChildren } from 'react';
 
-const Button = ({ children, className = '', type = 'submit', ...props }) => {
+export type ButtonComponentProps = ButtonTagProps;
+
+const Button = ({ children, className = '', type = 'submit', ...props }: ButtonComponentProps) => {
 
   const buttonClass = getClassName({
     [css.primary]: type === 'submit',
@@ -13,7 +17,15 @@ const Button = ({ children, className = '', type = 'submit', ...props }) => {
   );
 };
 
-Button.Link = ({ children, className = '', wrapperClass = '', type = '', ...props }) => {
+type RawButtonLinkProps = {
+  className?: string,
+  wrapperClass?: string,
+  type?: '' | 'primary',
+};
+
+export type ButtonLinkProps = PropsWithChildren<RawButtonLinkProps & Omit<LinkComponentProps, keyof RawButtonLinkProps>>;
+
+Button.Link = ({ children, className = '', wrapperClass = '', type = '', ...props }: ButtonLinkProps) => {
 
   const buttonClass = getClassName({
     [css.primary]: type === 'primary',
@@ -25,3 +37,4 @@ Button.Link = ({ children, className = '', wrapperClass = '', type = '', ...prop
 };
 
 export default Button;
+
