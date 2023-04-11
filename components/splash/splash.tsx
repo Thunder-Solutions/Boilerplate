@@ -1,20 +1,22 @@
 import css from './splash.module.css';
 import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
-import { getClassName } from 'utilities';
+import { DivTagProps, getClassName } from 'utilities';
 import SplashContext from './splashContext';
 import { useContext } from 'react';
 
-const Splash = ({ children }) => {
+type SplashProps = DivTagProps;
+
+const Splash = ({ children, className = '', ...props }: SplashProps) => {
 
   const image = useContext(SplashContext);
 
   const splashContainerClass = getClassName({
     [css.dark]: image.characteristic === 'dark',
     [css.light]: image.characteristic === 'light',
-  }, css.splashContainer);
+  }, css.splashContainer, className);
 
   return (
-    <div className={splashContainerClass}>
+    <div {...props} className={splashContainerClass}>
       <ParallaxBanner
         className={css.splash}
         layers={[

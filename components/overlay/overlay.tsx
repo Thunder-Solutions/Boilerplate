@@ -1,17 +1,19 @@
 import css from './overlay.module.css';
-import { createContextState, getClassName } from 'utilities';
+import { DivTagProps, createContextState, getClassName } from 'utilities';
 import { useState } from 'react';
 
 export const OverlayContext = createContextState(false);
 
-const Overlay = ({ children }) => {
+export type OverlayProps = DivTagProps;
+
+const Overlay = ({ children, className, ...props }: OverlayProps) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const overlayClass = getClassName({
     [css.visible]: showOverlay,
-  }, css.overlay);
+  }, css.overlay, className);
   return (
     <OverlayContext.Provider value={{ value: showOverlay, setValue: setShowOverlay }}>
-      <div className={overlayClass}></div>
+      <div {...props} className={overlayClass}></div>
       {children}
     </OverlayContext.Provider>
   );

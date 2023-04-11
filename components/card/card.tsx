@@ -1,10 +1,12 @@
 import css from './card.module.css';
-import { getClassName } from 'utilities';
+import { DivTagProps, getClassName } from 'utilities';
 
-const Card = ({ children, className = '' }) => {
+export type CardProps = DivTagProps;
+
+const Card = ({ children, className = '', ...props }: CardProps) => {
   const cardClass = getClassName({ [className]: !!className }, css.card);
   return (
-    <div className={css.cardContainer}>
+    <div {...props} className={css.cardContainer}>
       <div className={cardClass}>{children}</div>
     </div>
   );

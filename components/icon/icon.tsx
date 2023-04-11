@@ -18,12 +18,17 @@ import { RiPagesLine } from 'react-icons/ri';
 import { BiBookContent } from 'react-icons/bi';
 import { BsChevronDown } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 export type IconProps = {
   /**
    * For example, "Close," "Next," or "Facebook."
    */
   type: string,
+  /**
+   * For accessibility, if no title is visible, a title attribute should be used
+   */
+  title?: string,
   /**
    * In case it's important to override style on the inner icon wrapper
    */
@@ -58,7 +63,7 @@ const Icon = ({ type, className = '', iconClass = '', ...props }: IconProps) => 
     Page: RiPagesLine,
     Component: BiBookContent,
   };
-  const CurrentIcon = iconMap[type] ?? (() => <></>);
+  const CurrentIcon: IconType = iconMap[type] ?? (() => <></>);
   return (
     <span className={`${css.iconOuterWrapper} ${className}`}>
       <span className={`${css.iconInnerWrapper} ${iconClass}`}>

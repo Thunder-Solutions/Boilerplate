@@ -6,6 +6,7 @@ export type ValueOf<T> = T[keyof T];
 export type ReactState<T> = [T, Dispatch<SetStateAction<T>>];
 
 // DEFAULT TAG PROPS
+export type GenericTagProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 export type DivTagProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 export type SpanTagProps = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 export type HeadingTagProps = DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;

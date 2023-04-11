@@ -7,7 +7,7 @@ export type LinkComponentProps = {
   /**
    * To override the styles on the link wrapper
    */
-  wrapperClass: string,
+  wrapperClass?: string,
   /**
    * Changes the layout behavior of the link
    * @defaultValue `true`

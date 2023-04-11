@@ -1,8 +1,11 @@
+import { DivTagProps } from 'utilities';
 import css from './group.module.css';
 
-const Group = ({ children, className = '' }) => {
+export type GroupProps = DivTagProps
+
+const Group = ({ children, className = '', ...props }: GroupProps) => {
   return (
-    <div className={`${css.group} ${className}`}>{children}</div>
+    <div {...props} className={`${css.group} ${className}`} role="group">{children}</div>
   );
 };
 

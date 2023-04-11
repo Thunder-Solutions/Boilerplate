@@ -3,11 +3,15 @@ import LocaleContext from 'locales/localeContext';
 import { Fragment, useContext } from 'react';
 import css from './siteFooter.module.css';
 import Icon from 'components/icon/icon';
+import { GenericTagProps } from 'utilities';
 
-const SiteFooter = () => {
+export type SiteFooterProps = GenericTagProps;
+
+const SiteFooter = ({ className = '', ...props }: SiteFooterProps) => {
   const locale = useContext(LocaleContext);
+  const footerClass = `${css.footer} ${className}`
   return (
-    <footer className={css.footer}>
+    <footer {...props} className={footerClass}>
       <small>{locale.copyright}</small>
       <div className={css.links}>
         <div className={css.siteMap}>

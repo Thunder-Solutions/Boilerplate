@@ -1,16 +1,17 @@
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 import { useAPI } from 'utilities';
+import { FunctionComponent } from 'react';
+
+export type APIOptions = {
+  query: string,
+  args?: unknown[],
+}
 
 /**
  * A higher-order component that renders based on an async API call
- * @param {Object} options - The API options
- * @param {string} options.query - The key of the desired API query
- * @param {Array} options.args - The arguments to provide the API query
- * @param {React.Component} Component - The component to wrap
- * @returns {React.Component} The wrapped component
  */
-const withAPI = ({ query, args = [] }, Component) => {
+const withAPI = ({ query, args = [] }: APIOptions, Component: FunctionComponent<{ response: unknown }>) => {
   return () => {
     const apiGetter = useAPI(query);
     const [response, error] = apiGetter(...args);

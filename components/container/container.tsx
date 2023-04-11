@@ -1,8 +1,11 @@
+import { DivTagProps } from 'utilities';
 import css from './container.module.css';
 
-const Container = ({ children, className = '' }) => {
+export type ContainerProps = DivTagProps;
+
+const Container = ({ children, className = '', ...props }: ContainerProps) => {
   return (
-    <div className={`${css.container} ${className}`}>{children}</div>
+    <div {...props} className={`${css.container} ${className}`}>{children}</div>
   );
 };
 

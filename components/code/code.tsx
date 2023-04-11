@@ -1,8 +1,17 @@
 import css from './code.module.css';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { useEffect, useState } from 'react';
+import { GenericTagProps } from 'utilities';
 
-const Code = ({ inline, className, children, ...props }) => {
+export type CodeProps = {
+  /**
+   * If inline is true, `<code>` will be used without `<pre>`
+   * @defaultValue `false`
+   */
+  inline?: boolean,
+} & GenericTagProps;
+
+const Code = ({ inline, className, children, ...props }: CodeProps) => {
   const match = /language-(\w+)/.exec(className || '');
   const [theme, setTheme] = useState({});
   useEffect(() => {

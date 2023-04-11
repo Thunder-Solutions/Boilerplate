@@ -2,10 +2,39 @@ import Card from 'components/card/card';
 import Icon from 'components/icon/icon';
 import Link from 'components/link/link';
 import css from './address.module.css';
-import { PropTypes } from 'utilities';
+import { GenericTagProps, PropTypes } from 'utilities';
+
+export type AddressProps = {
+  /**
+   * Whether to treat this as a residential or business address
+   * @defaultValue `false`
+   */
+  isBusiness?: boolean,
+  /**
+   * Name of the business or individual
+   */
+  name?: string,
+  /**
+   * Title/occupation of the business or individual
+   */
+  title?: string,
+  /**
+   * Not displayed: represents the tel attribute of an `<a>` tag.
+   */
+  tel?: string,
+  /**
+   * The formatted phone number: the text content of an `<a>` tag with a `tel` attribute.
+   */
+  phone?: string,
+  // The rest are pretty obvious and need no explanation.
+  addressLine1?: string,
+  addressLine2?: string,
+  email?: string,
+} & GenericTagProps;
 
 const Address = ({
   children,
+  isBusiness = false,
   name,
   title,
   tel,
@@ -13,14 +42,14 @@ const Address = ({
   addressLine1,
   addressLine2,
   email,
-  isBusiness,
-}) => {
+  ...props
+}: AddressProps) => {
   const _tel = tel ?? (phone ?? '').replace(/\D/, '');
   const iconType = isBusiness ? 'Business' : 'Contact';
   return (
     <Card className={css.addressCard}>
       <Icon className={css.icon} type={iconType} />
-      <address className={css.address}>
+      <address {...props} className={css.address}>
         {(name || title)
           ? <div className={css.title}>
               {name}

@@ -9,7 +9,7 @@ type State<T> = {
   setValue: (newValue: unknown) => void,
 }
 
-type ContextState<T> = Context<State<T>>
+export type ContextState<T> = Context<State<T>>
 
 /**
  * This will create and return a Context object which can be used with `useContextState`.

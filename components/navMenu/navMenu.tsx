@@ -5,13 +5,29 @@ import Link from 'components/link/link';
 import Icon from 'components/icon/icon';
 import { OverlayContext } from 'components/overlay/overlay';
 
+export type NavMenuItem = {
+  text: string,
+  href?: string,
+  children?: NavMenuItem[],
+};
+
+export type NavMenuProps = {
+  open: boolean,
+  toggle?: () => void,
+  nested?: boolean,
+  mainItem?: NavMenuItem,
+  menuItems?: NavMenuItem[],
+};
+
+const DEFAULT_ITEM = { href: '', text: '' };
+
 const NavMenu = ({
   open = false,
   toggle = NOOP,
   nested = false,
-  mainItem: { href = '', text = '' } = {},
+  mainItem: { href, text } = DEFAULT_ITEM,
   menuItems = [],
-}) => {
+}: NavMenuProps) => {
 
   const navRef = useRef(null);
   const [_, setShowOverlay] = useContextState(OverlayContext);

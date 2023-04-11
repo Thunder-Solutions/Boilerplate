@@ -5,7 +5,11 @@ import NavMenu from 'components/navMenu/navMenu';
 import Icon from 'components/icon/icon';
 import Overlay from 'components/overlay/overlay';
 
-const MainNav = ({ open: _open = false }) => {
+export type MainNavProps = {
+  open?: boolean,
+}
+
+const MainNav = ({ open: _open = false }: MainNavProps) => {
   const locale = useContext(LocaleContext);
   const [open, setOpen] = useState(_open);
   useEffect(() => { setOpen(_open); }, [_open]);
