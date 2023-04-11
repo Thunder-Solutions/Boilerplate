@@ -2,12 +2,12 @@ import css from './input.module.css';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import { NOOP } from 'utilities';
-import { InputProps } from 'utilities/types';
+import { InputTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
 type InputComponentProps = PropsWithLabel<{
   autoFormat?: (value: string) => string,
-} & InputProps>;
+} & InputTagProps>;
 
 const Input = (props: InputComponentProps) => {
 

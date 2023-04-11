@@ -2,7 +2,7 @@ import css from './link.module.css';
 import NextLink, { LinkProps } from 'next/link';
 import { RefAttributes } from 'react';
 import { bool, getClassName } from 'utilities';
-import { AnchorProps } from 'utilities/types';
+import { AnchorTagProps } from 'utilities/types';
 
 export type LinkComponentProps = {
   /**
@@ -19,7 +19,7 @@ export type LinkComponentProps = {
    * @defaultValue `"default"`
    */
   type?: 'default' | 'none',
-} & Omit<AnchorProps, keyof LinkProps> & LinkProps & RefAttributes<HTMLAnchorElement>;
+} & Omit<AnchorTagProps, keyof LinkProps> & LinkProps & RefAttributes<HTMLAnchorElement>;
 
 const Link = ({
   children,

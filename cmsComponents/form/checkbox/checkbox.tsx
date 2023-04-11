@@ -3,9 +3,9 @@ import { NOOP } from 'utilities';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './checkbox.module.css';
-import { InputProps } from 'utilities/types';
+import { InputTagProps } from 'utilities/types';
 
-type CheckboxComponentProps = PropsWithLabel<InputProps>;
+type CheckboxComponentProps = PropsWithLabel<InputTagProps>;
 
 const Checkbox = (props: CheckboxComponentProps) => {
 

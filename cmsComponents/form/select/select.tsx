@@ -3,10 +3,10 @@ import { NOOP } from 'utilities';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './select.module.css';
-import { SelectProps } from 'utilities/types';
+import { SelectTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
-type SelectComponentProps = PropsWithLabel<SelectProps>;
+type SelectComponentProps = PropsWithLabel<SelectTagProps>;
 
 const Select = ({ children, ...props }: SelectComponentProps) => {
 

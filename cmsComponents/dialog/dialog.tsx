@@ -5,14 +5,14 @@ import { NOOP } from 'utilities';
 import Heading from 'cmsComponents/heading/heading';
 import Button from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
-import { DialogProps, ReactState } from 'utilities/types';
+import { DialogTagProps, ReactState } from 'utilities/types';
 
 export type DialogComponentProps = {
   title: string
   openState: ReactState<boolean>,
   className?: string,
   onClose?: (event: Event) => void,
-} & DialogProps;
+} & DialogTagProps;
 
 const Dialog = ({ children, className = '', title, openState, onClose = NOOP, ...props }: DialogComponentProps) => {
 

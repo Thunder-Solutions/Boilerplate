@@ -4,13 +4,13 @@ import Icon from 'cmsComponents/icon/icon';
 import { useState } from 'react';
 import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTuple } from 'utilities';
 import css from './component.module.css';
-import { DivProps } from 'utilities/types';
+import { DivTagProps } from 'utilities/types';
 
 type ComponentProps = {
   Component: Component,
   className?: string,
   onAdd?: (component?: CMSComponent) => void,
-} & DivProps;
+} & DivTagProps;
 
 const Component = ({
   children,

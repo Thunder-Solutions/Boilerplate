@@ -2,12 +2,12 @@ import css from './textarea.module.css';
 import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import { NOOP } from 'utilities';
-import { TextareaProps } from 'utilities/types';
+import { TextareaTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
 type TextareaComponentProps = PropsWithLabel<{
   autoFormat?: (value: string) => string,
-} & TextareaProps>;
+} & TextareaTagProps>;
 
 const Textarea = ({ children, ...props }: TextareaComponentProps) => {
 
