@@ -5,7 +5,7 @@ import { NOOP } from 'utilities';
 import { InputTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
-type InputComponentProps = PropsWithLabel<{
+export type InputComponentProps = PropsWithLabel<{
   autoFormat?: (value: string) => string,
 } & InputTagProps>;
 

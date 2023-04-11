@@ -6,7 +6,7 @@ import css from './select.module.css';
 import { SelectTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
-type SelectComponentProps = PropsWithLabel<SelectTagProps>;
+export type SelectComponentProps = PropsWithLabel<SelectTagProps>;
 
 const Select = ({ children, ...props }: SelectComponentProps) => {
 

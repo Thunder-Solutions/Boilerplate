@@ -6,7 +6,7 @@ import { CMSComponent, Component, getDefaultProps, NOOP, pascalToSpaces, PropTup
 import css from './component.module.css';
 import { DivTagProps } from 'utilities/types';
 
-type ComponentProps = {
+export type ComponentProps = {
   Component: Component,
   className?: string,
   onAdd?: (component?: CMSComponent) => void,

@@ -19,7 +19,7 @@ import { BiBookContent } from 'react-icons/bi';
 import { BsChevronDown } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 
-type IconProps = {
+export type IconProps = {
   /**
    * For example, "Close," "Next," or "Facebook."
    */

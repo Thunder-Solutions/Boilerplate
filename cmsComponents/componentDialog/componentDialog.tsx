@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { bool, getPropTypeInfo, NOOP, pascalToSpaces, PropTuple } from 'utilities';
 import { GenericObj, ReactState } from 'utilities/types';
 
-type ComponentDialogProps = {
+export type ComponentDialogProps = {
   cmsProps: PropTuple[],
   propState: ReactState<GenericObj>,
   onUpdateProps: (prop: string, value: string | number | boolean) => void,

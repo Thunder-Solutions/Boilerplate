@@ -1,7 +1,9 @@
 import { DivTagProps } from 'utilities/types';
 import css from './spinner.module.css';
 
-const Spinner = (props: DivTagProps) => {
+export type SpinnerProps = DivTagProps;
+
+const Spinner = (props: SpinnerProps) => {
   return (
     <div {...props}>
       <div className={css.spinner} title="loading..." />

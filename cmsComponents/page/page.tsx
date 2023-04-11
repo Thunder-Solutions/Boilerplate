@@ -3,7 +3,7 @@ import Icon from 'cmsComponents/icon/icon';
 import css from './page.module.css';
 import { DivTagProps } from 'utilities/types';
 
-type NavLinkProps = {
+export type NavLinkProps = {
   icon: string,
 } & ButtonLinkProps;
 

@@ -5,7 +5,7 @@ import { NOOP } from 'utilities';
 import { TextareaTagProps } from 'utilities/types';
 import { ChangeEventHandler } from 'react';
 
-type TextareaComponentProps = PropsWithLabel<{
+export type TextareaComponentProps = PropsWithLabel<{
   autoFormat?: (value: string) => string,
 } & TextareaTagProps>;
 

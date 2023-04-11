@@ -9,7 +9,7 @@ import { CMSComponent, createComponent, NOOP, pureSplice } from 'utilities';
 import * as allComponents from 'components';
 import { ReactState } from 'utilities/types';
 
-type ComponentChildrenProps = {
+export type ComponentChildrenProps = {
   componentState?: ReactState<CMSComponent[]>,
   onAdd: (component?: CMSComponent) => void,
 };

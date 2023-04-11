@@ -1,7 +1,7 @@
 import Heading from'components/heading/heading';
 import css from './pageHeading.module.css';
 
-type PageHeadingProps = {
+export type PageHeadingProps = {
   title: string,
   subtitle?: string,
 };

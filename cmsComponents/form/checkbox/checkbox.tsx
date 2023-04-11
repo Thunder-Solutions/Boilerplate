@@ -5,7 +5,7 @@ import Label from '../label/label';
 import css from './checkbox.module.css';
 import { InputTagProps } from 'utilities/types';
 
-type CheckboxComponentProps = PropsWithLabel<InputTagProps>;
+export type CheckboxComponentProps = PropsWithLabel<InputTagProps>;
 
 const Checkbox = (props: CheckboxComponentProps) => {
 

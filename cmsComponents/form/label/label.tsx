@@ -2,7 +2,7 @@ import { getClassName } from 'utilities';
 import css from './label.module.css';
 import { LabelTagProps } from 'utilities/types';
 
-type LabelComponentProps = {
+export type LabelComponentProps = {
   label?: string,
   inline?: boolean,
   required?: boolean,

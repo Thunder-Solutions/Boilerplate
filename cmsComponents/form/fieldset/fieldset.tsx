@@ -1,7 +1,7 @@
 import { FieldsetTagProps } from 'utilities/types';
 import css from './fieldset.module.css';
 
-type FieldsetComponentProps = FieldsetTagProps & {
+export type FieldsetComponentProps = FieldsetTagProps & {
   legend?: string,
 };
 

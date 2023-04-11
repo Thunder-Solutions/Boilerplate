@@ -1,7 +1,7 @@
 import NextHead from 'next/head';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
-type Config = {
+export type Config = {
   /**
    * This prepends the meta title, separated by a `|`
    */
@@ -12,7 +12,7 @@ type Config = {
   rootUrl: string,
 }
 
-type Meta = {
+export type Meta = {
   /**
    * The meta title will be appended to the config `siteTitle`, separated by a `|`
    */
@@ -31,7 +31,7 @@ type Meta = {
   image: string,
 }
 
-type HeadProps = PropsWithChildren<{
+export type HeadProps = PropsWithChildren<{
   /**
    * This title takes precedence over the title sent in the `meta` prop
    */
@@ -49,7 +49,7 @@ type HeadProps = PropsWithChildren<{
 /**
  * This is the default config, implicit with every use of `<Head>` in the absence of overrides.
  */
-const DEFAULT_CONFIG = {
+export const DEFAULT_CONFIG = {
   siteTitle: 'Thunder Solutions',
   rootUrl: 'https://thunder.solutions',
 }
@@ -57,7 +57,7 @@ const DEFAULT_CONFIG = {
 /**
  * This is the default meta, implicit with every use of `<Head>` in the absence of overrides.
  */
-const DEFAULT_META = {
+export const DEFAULT_META = {
   title: 'CMS Portal',
   description: 'An administrative portal and CMS.',
   url: '/admin',

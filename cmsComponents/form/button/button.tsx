@@ -4,7 +4,9 @@ import css from './button.module.css';
 import { ButtonTagProps } from 'utilities/types';
 import { PropsWithChildren } from 'react';
 
-const Button = ({ children, className = '', type = 'submit', ...props }: ButtonTagProps) => {
+export type ButtonComponentProps = ButtonTagProps;
+
+const Button = ({ children, className = '', type = 'submit', ...props }: ButtonComponentProps) => {
 
   const buttonClass = getClassName({
     [css.primary]: type === 'submit',
