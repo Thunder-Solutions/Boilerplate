@@ -1,10 +1,14 @@
 import Icon from 'cmsComponents/icon/icon';
 import { NOOP } from 'utilities';
-import { getValidationHelpers } from '../formUtilities';
+import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './select.module.css';
+import { SelectProps } from 'utilities/types';
+import { ChangeEventHandler } from 'react';
 
-const Select = ({ children, ...props }) => {
+type SelectComponentProps = PropsWithLabel<SelectProps>;
+
+const Select = ({ children, ...props }: SelectComponentProps) => {
 
   // not destructuring above because we want to pass all props around
   const {
@@ -24,8 +28,8 @@ const Select = ({ children, ...props }) => {
     inputClass: css.select,
   });
 
-  const handleChange = event => {
-    validate(event);
+  const handleChange: ChangeEventHandler = (event) => {
+    validate(event.nativeEvent);
     onChange(event);
   };
 
@@ -42,7 +46,7 @@ const Select = ({ children, ...props }) => {
         >
           {defaultValue
             ? <></>
-            : <option value="" disabled="disabled">Select an option...</option>
+            : <option value="" disabled>Select an option...</option>
           }
           {children}
         </select>

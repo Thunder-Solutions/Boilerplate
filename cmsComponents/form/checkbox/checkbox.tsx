@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { NOOP } from 'utilities';
-import { getValidationHelpers } from '../formUtilities';
+import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import css from './checkbox.module.css';
+import { InputProps } from 'utilities/types';
 
-const Checkbox = props => {
+type CheckboxComponentProps = PropsWithLabel<InputProps>;
+
+const Checkbox = (props: CheckboxComponentProps) => {
 
   // not destructuring above because we want to pass all props around
   const {
@@ -25,9 +28,9 @@ const Checkbox = props => {
   });
 
   const [checked, setChecked] = useState(_checked);
-  const handleChange = event => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setChecked(event.target.checked);
-    validate(event);
+    validate(event.nativeEvent);
     onChange(event);
   };
 
@@ -47,11 +50,11 @@ const Checkbox = props => {
         checked={checked}
       />
       <span
-        tabIndex="0"
+        tabIndex={0}
         className={className}
         onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
         data-is-checkable="true"
+        onBlur={handleBlur}
       />
     </Label>
   );

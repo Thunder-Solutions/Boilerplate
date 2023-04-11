@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef, useContext, FocusEventHandler } from 'react';
 import { createContextState, NOOP, getClassName } from 'utilities';
 import css from './formValidation.module.css';
 
@@ -20,13 +20,13 @@ export const DEFAULT_SUBMIT = (data: FormData) => {
 type ValidationProps = {
   className?: string,
   getValidityMessage?: (value?: string) => string,
-  onBlur?: (event: Event) => void,
+  onBlur?: FocusEventHandler,
 }
 
 type ValidationArgs = {
   props: ValidationProps,
-  inputClass: string,
-  inputArr: HTMLInputElement[],
+  inputClass?: string,
+  inputArr?: HTMLInputElement[],
 }
 
 /**
@@ -78,7 +78,7 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
     else inputRefs.current.forEach(input => input.setCustomValidity(''));
   };
 
-  const handleBlur = (event: Event) => {
+  const handleBlur: FocusEventHandler = (event) => {
     checkValidity();
     setTouched(true);
     onBlur(event);
@@ -99,3 +99,5 @@ export const getValidationHelpers = ({ props = {}, inputClass = '', inputArr = [
     validate,
   };
 };
+
+export type PropsWithLabel<P> = P & { label?: string };

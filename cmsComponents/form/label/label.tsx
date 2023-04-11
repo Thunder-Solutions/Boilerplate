@@ -1,7 +1,14 @@
 import { getClassName } from 'utilities';
 import css from './label.module.css';
+import { LabelProps } from 'utilities/types';
 
-const Label = ({ children, label = 'Form Field', inline = false, required = false, ...props }) => {
+type LabelComponentProps = {
+  label?: string,
+  inline?: boolean,
+  required?: boolean,
+} & LabelProps;
+
+const Label = ({ children, label = '', inline = false, required = false, ...props }: LabelComponentProps) => {
 
   const labelClass = getClassName({
     [css.inline]: inline,

@@ -1,13 +1,19 @@
 import css from './input.module.css';
-import { getValidationHelpers } from '../formUtilities';
+import { PropsWithLabel, getValidationHelpers } from '../formUtilities';
 import Label from '../label/label';
 import { NOOP } from 'utilities';
+import { InputProps } from 'utilities/types';
+import { ChangeEventHandler } from 'react';
 
-const Input = props => {
+type InputComponentProps = PropsWithLabel<{
+  autoFormat?: (value: string) => string,
+} & InputProps>;
+
+const Input = (props: InputComponentProps) => {
 
   // not destructuring above because we want to pass all props around
   const {
-    autoFormat = v => v,
+    autoFormat = (v: string): string => v,
     onInput = NOOP,
     label = '',
     required = false,
@@ -23,9 +29,9 @@ const Input = props => {
     inputClass: css.input,
   });
 
-  const handleInput = event => {
+  const handleInput: ChangeEventHandler = (event) => {
     inputRef.current.value = autoFormat(inputRef.current.value);
-    validate(event);
+    validate(event.nativeEvent);
     onInput(event);
   };
 
