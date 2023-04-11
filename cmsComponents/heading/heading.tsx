@@ -1,12 +1,22 @@
 import css from './heading.module.css';
 import { DivTagProps, HeadingTagProps } from 'utilities/types';
 
-export type HeadingComponentProps = { lv?: number } & (DivTagProps | HeadingTagProps);
+export type HeadingComponentProps = {
+  /**
+   * The heading level.
+   * @example
+   * <Heading h={1}> === <h1>
+   * <Heading h={2}> === <h2>
+   * ...etc
+   * @defaultValue `2`
+   */
+  h?: number,
+} & (DivTagProps | HeadingTagProps);
 
-const Heading = ({ children, lv = 2 }: HeadingComponentProps) => {
+const Heading = ({ children, h = 2 }: HeadingComponentProps) => {
 
-  // if `lv` is 0 (or a non-number) remove all semantics completely
-  const H = (lv === 0 || isNaN(lv)) ? (props: DivTagProps) => <div {...props} /> : `h${lv}`;
+  // if `h` is 0 (or a non-number) remove all semantics completely
+  const H = (h === 0 || isNaN(h)) ? (props: DivTagProps) => <div {...props} /> : `h${h}`;
 
   return <H className={css.title}>{children}</H>;
 };

@@ -9,7 +9,7 @@ export type PageHeadingProps = {
 const PageHeading = ({ title, subtitle }: PageHeadingProps) => {
   return (
     <header className={css.header}>
-      <Heading lv={1} className={css.title}>{title}</Heading>
+      <Heading h={1} className={css.title}>{title}</Heading>
       {subtitle ? <Heading className={css.subtitle}>{subtitle}</Heading> : <></>}
     </header>
   );
