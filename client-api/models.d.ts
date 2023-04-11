@@ -7,3 +7,7 @@ export type ToDo = {
 export type ToDosResponse = {
   toDos: ToDo[],
 };
+
+export type AddToDoResponse = {
+  newToDo: ToDo,
+};
