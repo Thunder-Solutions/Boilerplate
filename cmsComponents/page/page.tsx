@@ -1,15 +1,20 @@
-import Button from 'cmsComponents/form/button/button';
+import Button, { ButtonLinkProps } from 'cmsComponents/form/button/button';
 import Icon from 'cmsComponents/icon/icon';
 import css from './page.module.css';
+import { DivProps } from 'utilities/types';
 
-const NavLink = ({ children, icon, ...props }) => <div>
+type NavLinkProps = {
+  icon: string,
+} & ButtonLinkProps;
+
+const NavLink = ({ children, icon, ...props }: NavLinkProps) => <div>
   <Button.Link {...props} wrapperClass={css.cmsNavLinkWrapper} className={css.cmsNavLink}>
     <Icon type={icon} />
     {children}
   </Button.Link>
 </div>;
 
-const Page = ({ children, className = '', ...props }) => {
+const Page = ({ children, className = '', ...props }: DivProps) => {
 
   const pageClass = `${className} ${css.page}`;
 

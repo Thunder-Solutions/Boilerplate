@@ -1,7 +1,8 @@
-import Link from 'cmsComponents/link/link';
+import Link, { LinkComponentProps } from 'cmsComponents/link/link';
 import { getClassName } from 'utilities';
 import css from './button.module.css';
 import { ButtonProps } from 'utilities/types';
+import { PropsWithChildren } from 'react';
 
 const Button = ({ children, className = '', type = 'submit', ...props }: ButtonProps) => {
 
@@ -14,7 +15,15 @@ const Button = ({ children, className = '', type = 'submit', ...props }: ButtonP
   );
 };
 
-Button.Link = ({ children, className = '', wrapperClass = '', type = '', ...props }) => {
+type RawButtonLinkProps = {
+  className?: string,
+  wrapperClass?: string,
+  type?: '' | 'primary',
+};
+
+export type ButtonLinkProps = PropsWithChildren<RawButtonLinkProps & Omit<LinkComponentProps, keyof RawButtonLinkProps>>;
+
+Button.Link = ({ children, className = '', wrapperClass = '', type = '', ...props }: ButtonLinkProps) => {
 
   const buttonClass = getClassName({
     [css.primary]: type === 'primary',

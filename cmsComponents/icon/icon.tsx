@@ -19,7 +19,25 @@ import { BiBookContent } from 'react-icons/bi';
 import { BsChevronDown } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 
-const Icon = ({ type, className = '', iconClass = '', ...props }) => {
+type IconProps = {
+  /**
+   * For example, "Close," "Next," or "Facebook."
+   */
+  type: string,
+  /**
+   * In case it's important to override style on the inner icon wrapper
+   */
+  iconClass?: string,
+  /**
+   * Overrides style on the outermost icon wrapper
+   */
+  className?: string,
+};
+
+/**
+ * Consolidates the configuration of all icons to a single component. Very helpful for swapping out icon libraries.
+ */
+const Icon = ({ type, className = '', iconClass = '', ...props }: IconProps) => {
   const iconMap = {
     Facebook: FaFacebook,
     LinkedIn: FaLinkedin,
@@ -40,11 +58,11 @@ const Icon = ({ type, className = '', iconClass = '', ...props }) => {
     Page: RiPagesLine,
     Component: BiBookContent,
   };
-  const Icon = iconMap[type] ?? (() => <></>);
+  const CurrentIcon = iconMap[type] ?? (() => <></>);
   return (
     <span className={`${css.iconOuterWrapper} ${className}`}>
       <span className={`${css.iconInnerWrapper} ${iconClass}`}>
-        <Icon {...props} />
+        <CurrentIcon {...props} />
       </span>
     </span>
   );

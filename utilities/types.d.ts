@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, Dispatch, HTMLAttributes, ReactNode, SetStateAction } from 'react';
+import { AnchorHTMLAttributes, DetailedHTMLProps, Dispatch, HTMLAttributes, ReactNode, SetStateAction } from 'react';
 
 export type GenericObj = { [key: PropertyKey]: unknown };
 export type GenericFn = (...args: unknown[]) => unknown;
@@ -16,3 +16,4 @@ export type FieldsetProps = DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSe
 export type LabelProps = DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>;
 export type SelectProps = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 export type TextareaProps = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+export type AnchorProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
