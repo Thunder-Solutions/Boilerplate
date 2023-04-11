@@ -1,6 +1,7 @@
-import { gqlMutate } from 'utilities';
+import { ToDo, ToDosResponse } from 'client-api/models';
+import { GQLResponse, gqlMutate } from 'utilities';
 
-const addToDo = toDo => gqlMutate(`
+const addToDo = (toDo: ToDo): GQLResponse<ToDosResponse> => gqlMutate(`
   mutation AddToDo($toDo: ToDo) {
     toDo(toDo: $toDo) {
       title

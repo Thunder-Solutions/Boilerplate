@@ -13,15 +13,15 @@ type GQLQueryOptions = QueryOptions<OperationVariables, any>;
 type GQLMutationOptions = MutationOptions<any, OperationVariables, DefaultContext, ApolloCache<any>>;
 type GQLOptions = GQLQueryOptions | GQLMutationOptions;
 
-type GQLResponse = {
-  request: Promise<unknown>,
+export type GQLResponse<T> = {
+  request: Promise<T>,
   abortController: AbortController,
 }
 
 /**
  * Wraps a GraphQL query in a promise with Abort logic and error handling
  */
-const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
+const gqlRequest = <T>(options: Partial<GQLOptions> = {}): GQLResponse<T> => {
   const action = 'mutation' in options ? 'mutate' : 'query';
   const result = 'mutation' in options ? 'mutation' : 'query';
 
@@ -42,7 +42,7 @@ const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
   };
 
   // wrap the request in a promise to handle cancelled requests
-  const request = new Promise((resolve, reject) => {
+  const request = new Promise<T>((resolve, reject) => {
     if (signal) signal.onabort = () => { reject(new Error('The operation was aborted')); };
 
     // TODO: fix the type problems with client
@@ -77,7 +77,7 @@ const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
         return val;
       };
       resolve(unwrap(data));
-    }).catch(err => {
+    }).catch((err: Error) => {
 
       // clean up error message in case it was thrown multiple times
       err.message = err.message.replace(/^(Error: )*/, '');
@@ -92,7 +92,7 @@ const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
       console.groupEnd();
       console.groupEnd();
       reject(err);
-    }).then(response => {
+    }).then((response: T) => {
       resolve(response);
     });
   });
@@ -104,7 +104,7 @@ const gqlRequest = (options: Partial<GQLOptions> = {}): GQLResponse => {
 /**
  * A utility that shortens Apollo queries by abstracting redundant options away from the foreground
  */
-export const gqlQuery = (query: string, options: Partial<GQLQueryOptions> = {}): GQLResponse => gqlRequest({ ...options, query: gql`${query}` });
+export const gqlQuery = <T>(query: string, options: Partial<GQLQueryOptions> = {}): GQLResponse<T> => gqlRequest({ ...options, query: gql`${query}` });
 
 /**
  * A utility that shortens Apollo mutations by abstracting
@@ -113,7 +113,7 @@ export const gqlQuery = (query: string, options: Partial<GQLQueryOptions> = {}):
  * @param {unknown} options - The rest of the query options
  * @returns {{request: Promise<unknown>, abortController: AbortController}} The promise and corresponding abort controller
  */
-export const gqlMutate = (mutation: string, options: Partial<GQLMutationOptions> = {}): GQLResponse => gqlRequest({ ...options, mutation: gql`${mutation}` });
+export const gqlMutate = <T>(mutation: string, options: Partial<GQLMutationOptions> = {}): GQLResponse<T> => gqlRequest({ ...options, mutation: gql`${mutation}` });
 
 /**
  * A convenient GET call for JSON responses

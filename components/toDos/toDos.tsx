@@ -2,16 +2,7 @@ import css from './toDos.module.css';
 import withAPI from '../withAPI/withAPI';
 import Heading from'components/heading/heading';
 import Content from 'components/content/content';
-
-type ToDo = {
-  _id: string,
-  title: string,
-  description: string,
-};
-
-type ToDosResponse = {
-  toDos: ToDo[],
-};
+import { ToDosResponse } from 'client-api/models';
 
 const validateToDos = (response: unknown): response is ToDosResponse => {
   return typeof response === 'object'
