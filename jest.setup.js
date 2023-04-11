@@ -5,7 +5,7 @@ beforeAll(() => {
   delete window.location;
   window.location = Object.assign({}, OLD_LOC);
   const url = Object.assign({}, new URL('http://localhost:3000'));
-  Object.keys(url).forEach(prop => (window.location[prop] = url[prop]));
+  Object.keys(url).forEach((prop) => (window.location[prop] = url[prop]));
 });
 
 beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Container, ErrorMessage, Group, Head, Page, PageTitle, ToDos, Content } from 'components';
+import { Container, ErrorMessage, Group, Head, Page, PageHeading, ToDos, Content } from 'components';
 import { getLocaleData } from 'client-api';
 
 const ToDoPage = ({ response }) => {
@@ -10,7 +10,7 @@ const ToDoPage = ({ response }) => {
   return (
     <Page id="To Dos">
       <Head/>
-      <PageTitle title={locale.pageTitle} />
+      <PageHeading title={locale.pageTitle} />
       <Container>
         <Group>
           <Content>{locale.content}</Content>

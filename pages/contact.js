@@ -1,4 +1,4 @@
-import { Container, ErrorMessage, Group, Head, Title, Page, PageTitle, Content, Link, Address } from 'components';
+import { Container, ErrorMessage, Group, Head, Heading, Page, PageHeading, Content, Link, Address } from 'components';
 import { getLocaleData } from 'client-api';
 
 const ContactPage = ({ response }) => {
@@ -10,17 +10,17 @@ const ContactPage = ({ response }) => {
   return (
     <Page id="Contact">
       <Head/>
-      <PageTitle title={locale.pageTitle} />
+      <PageHeading title={locale.pageTitle} />
       <Container>
         <Group>
-          <Title>{locale.sectionOneTitle}</Title>
+          <Heading>{locale.sectionOneTitle}</Heading>
           <Content>{locale.sectionOneContent}</Content>
         </Group>
         <Group>
           <Address {...locale.company} isBusiness={true} />
         </Group>
         <Group>
-          <Title>{locale.sectionTwoTitle}</Title>
+          <Heading>{locale.sectionTwoTitle}</Heading>
           <Content>{locale.sectionTwoContent}</Content>
         </Group>
         <Group>

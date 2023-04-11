@@ -27,7 +27,7 @@ const MyApp = ({ Component, pageProps, locales }) => {
   );
 };
 
-MyApp.getInitialProps = async appContext => {
+MyApp.getInitialProps = async (appContext) => {
   const locales = await getLocaleData('global').request;
   const context = await App.getInitialProps(appContext);
   return {
