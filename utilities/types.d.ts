@@ -1,7 +1,7 @@
 import { AnchorHTMLAttributes, DetailedHTMLProps, Dispatch, HTMLAttributes, ReactNode, SetStateAction } from 'react';
 
 export type GenericObj<T = unknown> = { [key: PropertyKey]: T };
-export type GenericFn = (...args: unknown[]) => unknown;
+export type GenericFn<T = unknown, A = unknown> = (...args: T[]) => A;
 export type ValueOf<T> = T[keyof T];
 export type ReactState<T> = [T, Dispatch<SetStateAction<T>>];
 

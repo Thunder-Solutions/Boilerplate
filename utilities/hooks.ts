@@ -1,6 +1,7 @@
 import { NOOP } from './constants';
 import { useState, useEffect, useRef } from 'react';
 import * as Queries from 'client-api';
+import { GenericFn } from './types';
 
 type DarkModePref<T> = {
   dark: T,
@@ -20,9 +21,8 @@ export const useDarkMode = <T>({ dark, light }: DarkModePref<T>): T => {
 
 /**
  * Encapsulated useState which updates the theme as a class name on the document element.
- * @returns {[string, () => void]} The name of the theme and the setter
  */
-export const useTheme = () => {
+export const useTheme = (): [ string, (theme: string) => void]  => {
   const [theme, setTheme] = useState('base');
 
   // get the initial theme value and watch it for changes
@@ -41,17 +41,15 @@ export const useTheme = () => {
 
   // custom setter for external use, because the mutation observer
   // takes care of the React state
-  const _setTheme = newTheme => { document.documentElement.className = newTheme; };
+  const _setTheme = (newTheme: string) => { document.documentElement.className = newTheme; };
 
   return [theme, _setTheme];
 };
 
 /**
  * Wraps API requests in useState for asynchronous responses
- * @param {string} key - The key of the specific query to use
- * @returns {() => [?unknown, ?Error]} - The API method which returns react state values as [response, error]
  */
-export const useAPI = key => (...args) => {
+export const useAPI = (key: string) => (...args : unknown[]) : [unknown, Error]=> {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -62,16 +60,20 @@ export const useAPI = key => (...args) => {
   return [response, error];
 };
 
+
+type DeBounceOptions = {
+    delay : number,
+    reset : boolean,
+}
+
+
 /**
  * Uses timeouts with useRef to prevent excess function calls.
- * @template A,T
- * @param {(...args: A) => T} debounceCallback - The function to debounce
- * @param {{ delay: number, reset: boolean }} options - The debounce options, if any
- * @param {number} options.delay - Milliseconds to wait before (and between) executions
- * @param {boolean} options.reset - Whether to reset the delay with every call, hence calling only once at the end
- * @returns {(...args: A) => Promise<T>} A promisified (debounced) version of the provided callback
  */
-export const useDebounce = (debounceCallback, options) => {
+export const useDebounce = <T,A>(
+    debounceCallback : GenericFn<T,A>, 
+    options? : DeBounceOptions
+): GenericFn<T, Promise<A>> => {
   const DEFAULT_DEBOUNCE_OPTIONS = { delay: 100, reset: false };
   const { delay, reset } = {
     ...DEFAULT_DEBOUNCE_OPTIONS,
@@ -95,14 +97,12 @@ export const useDebounce = (debounceCallback, options) => {
 
 /**
  * A custom useState hook which updates on scroll
- * @param {HTMLElement} _element - The element on which to apply the scroll
- * @returns {[boolean, number[], number[]]} [scrolled, coords: [top, left, bottom, right], dimensions: [width, height]]
  */
-export const useScroll = element => {
+export const useScroll = (element : HTMLElement) : [boolean, number[], number[]] => {
   const [scrolled, setScrolled] = useState(false);
   const [coords, setCoords] = useState([0, 0, 600, 800]);
   const [dimensions, setDimensions] = useState([800, 600]);
-  const setScrollValues = useDebounce(_element => {
+  const setScrollValues = useDebounce((_element: HTMLElement) => {
     const atBeginning = _element.scrollTop === 0 && _element.scrollLeft === 0;
     setScrolled(!atBeginning);
     setDimensions([_element.clientWidth, _element.clientHeight]);
@@ -124,23 +124,25 @@ export const useScroll = element => {
   return [scrolled, coords, dimensions];
 };
 
+type LazyLoadParams = {
+    getCondition : () => boolean,
+    getData : () => Promise<null>,
+    onLoad: (args : { data : unknown, markAsEndOfList: () => void}) => void,
+    subscribe : (args : () => Promise<void>) => void,
+    getUnsubscribe: (args : () => Promise<void>) => () => void 
+}
+
+
 /**
  * Consolidating the repetitive logic of lazy loaders to one shared function
- * @param {object} config - The object used to configure the lazy load options
- * @param {function} config.getCondition - This function's return value will determine whether or not to trigger the loader
- * @param {function} config.getData - The async function that should resolve to the data being loaded
- * @param {function} config.onLoad - The callback to run upon loading the data
- * @param {function} config.subscribe - This callback injects the main load function for use with event listeners or subscribers
- * @param {function} config.getUnsubscribe - This callback should return a cleanup function that unsubscribes anything set in effect
- * @returns {boolean} - From the react state hook to indicate whether the data is still loading or not
  */
 export const useLazyLoad = ({
   getCondition = () => true,
   getData = () => null,
   onLoad = ({ markAsEndOfList }) => markAsEndOfList(),
   subscribe = NOOP,
-  getUnsubscribe = NOOP,
-}) => {
+  getUnsubscribe = () => NOOP,
+} : Partial<LazyLoadParams>) : boolean => {
   const [endOfList, setEndOfList] = useState(false);
   const [loading, setLoading] = useState(false);
   const markAsEndOfList = () => setEndOfList(true);
@@ -159,17 +161,11 @@ export const useLazyLoad = ({
   return loading;
 };
 
+
 /**
  * Composes the useLazyLoad utility for more specific usage with scrolling
- * @param {object} config - The object used to configure the lazy load options
- * @param {function} config.getCondition - This function's return value will determine whether or not to trigger the loader
- * @param {function} config.getData - The async function that should resolve to the data being loaded
- * @param {function} config.onLoad - The callback to run upon loading the data
- * @param {function} config.subscribe - This callback injects the main load function for use with event listeners or subscribers
- * @param {function} config.getUnsubscribe - This callback should return a cleanup function that unsubscribes anything set in effect
- * @returns {boolean} - From the react state hook to indicate whether the data is still loading or not
  */
-export const useLazyLoadScroll = (config = {}) => useLazyLoad({
+export const useLazyLoadScroll = (config : Partial<LazyLoadParams> = {}) => useLazyLoad({
   ...config,
   getCondition: () => {
     const { scrollY, innerHeight } = window;
@@ -179,11 +175,11 @@ export const useLazyLoadScroll = (config = {}) => useLazyLoad({
     const defaultCondition = 'getCondition' in config ? config.getCondition() : true;
     return isBottomOfPage && defaultCondition;
   },
-  subscribe: lazyLoad => {
+  subscribe: (lazyLoad) => {
     window.addEventListener('scroll', lazyLoad);
     if ('subscribe' in config) config.subscribe(lazyLoad);
   },
-  getUnsubscribe: lazyLoad => () => {
+  getUnsubscribe: (lazyLoad) => () => {
     window.removeEventListener('scroll', lazyLoad);
     if ('getUnsubscribe' in config) config.getUnsubscribe(lazyLoad)();
   },
