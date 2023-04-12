@@ -14,4 +14,7 @@ pub enum Error {
 
     #[error("Refresh token is invalid")]
     InvalidRefreshToken,
+
+    #[error("Please Login to access this resource.")]
+    Unauthorized,
 }

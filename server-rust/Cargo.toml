@@ -3,5 +3,4 @@
 members = [
     "data-access",
     "utilities",
-    "graphql-server",
 ]

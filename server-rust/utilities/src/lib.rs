@@ -1,10 +1,12 @@
-use jsonwebtoken::{encode, EncodingKey, Header};
+use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use pbkdf2::{
     password_hash::{Error, PasswordHasher, Salt, SaltString},
     Pbkdf2,
 };
 use rand_core::OsRng;
-use serde::Serialize;
+use serde::{de::DeserializeOwned, Serialize};
+
+mod test;
 
 fn hash_password<'a>(password: &'a str, salt: impl Into<Salt<'a>>) -> Result<String, Error> {
     Pbkdf2
@@ -32,14 +34,23 @@ pub fn is_password_correct<'a>(
 
 pub fn generate_token<'a, T: Serialize>(
     claims: &'a T,
+    secret: &'a str,
 ) -> Result<String, jsonwebtoken::errors::Error> {
     encode(
         &Header::default(),
         claims,
-        &EncodingKey::from_secret(
-            std::env::var("ACCESS_TOKEN_SECRET")
-                .expect("Cannot find ACCESS_TOKEN_SECRET in env variables!")
-                .as_ref(),
-        ),
+        &EncodingKey::from_secret(secret.as_bytes()),
     )
+}
+
+pub fn decode_token<'a, T: DeserializeOwned>(
+    token: &'a str,
+    secret: &'a str,
+) -> Result<T, jsonwebtoken::errors::Error> {
+    let res = decode(
+        token,
+        &DecodingKey::from_secret(secret.as_bytes()),
+        &Validation::new(jsonwebtoken::Algorithm::default()),
+    )?;
+    Ok(res.claims)
 }

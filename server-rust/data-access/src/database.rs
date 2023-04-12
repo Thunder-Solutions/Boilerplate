@@ -1,13 +1,10 @@
+use crate::error::Error;
 use mongodb::{
     options::{ClientOptions, ResolverConfig},
     Client,
 };
 
-pub mod api;
-pub mod error;
-pub mod model;
-
-pub async fn connect_database() -> Result<Client, error::Error> {
+pub async fn connect_database() -> Result<Client, Error> {
     let client_uri =
         std::env::var("MONGODB_URI").expect("You must set the MONGODB_URI environment var!");
 

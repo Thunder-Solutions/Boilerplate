@@ -4,7 +4,7 @@ use mongodb::Database;
 use crate::{error::Error, model::User};
 
 pub async fn logout(
-    database: Database,
+    database: &Database,
     user_id: ObjectId,
     refresh_token: String,
     everywhere: bool,

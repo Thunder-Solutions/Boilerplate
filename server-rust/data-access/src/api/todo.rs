@@ -4,7 +4,7 @@ use mongodb::Database;
 use crate::{error::Error, model::Todo};
 
 impl Todo {
-    pub async fn get(database: Database) -> Result<Vec<Self>, Error> {
+    pub async fn get(database: &Database) -> Result<Vec<Self>, Error> {
         let todos = database.collection::<Todo>("todo");
         let mut res = todos.find(None, None).await?;
         let mut todos: Vec<Self> = Vec::new();
@@ -15,7 +15,7 @@ impl Todo {
     }
 
     pub async fn add(
-        database: Database,
+        database: &Database,
         title: String,
         description: String,
     ) -> Result<Self, Error> {

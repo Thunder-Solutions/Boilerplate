@@ -1,3 +1,5 @@
+use std::env::var;
+
 use bson::{doc, oid::ObjectId};
 use mongodb::Database;
 use utilities::generate_token;
@@ -20,12 +22,15 @@ pub async fn new_token(
         return Err(Error::InvalidRefreshToken);
     }
 
-    let access_token = generate_token(&AccessToken {
-        sub: user.id,
-        email: user.email,
-        username: user.username,
-        exp: (chrono::offset::Utc::now() + chrono::Duration::minutes(15)).timestamp() as usize,
-    })
+    let access_token = generate_token(
+        &AccessToken {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            exp: (chrono::offset::Utc::now() + chrono::Duration::minutes(15)).timestamp() as usize,
+        },
+        &var("ACCESS_TOKEN_SECRET").expect("access token secret not preset!"),
+    )
     .map_err(|_| Error::HashError)?;
     Ok(access_token)
 }

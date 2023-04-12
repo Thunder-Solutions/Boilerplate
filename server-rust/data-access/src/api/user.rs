@@ -4,13 +4,13 @@ use mongodb::Database;
 use utilities::*;
 
 impl User {
-    pub async fn get(database: Database, id: ObjectId) -> Result<Option<Self>, Error> {
+    pub async fn get(database: &Database, id: ObjectId) -> Result<Option<Self>, Error> {
         let users = database.collection::<User>("user");
         Ok(users.find_one(doc! { "_id" : id}, None).await?)
     }
 
     pub async fn add(
-        database: Database,
+        database: &Database,
         username: String,
         email: String,
         display_name: String,
