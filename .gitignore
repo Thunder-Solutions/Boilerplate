@@ -41,7 +41,3 @@ logs
 
 # cache files
 .eslintcache
- 
-#rust build files
-target
-.env 
