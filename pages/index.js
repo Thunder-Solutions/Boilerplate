@@ -1,4 +1,4 @@
-import { Container, ErrorMessage, Group, Head, Markdown, Page, PageTitle, Splash, withAPI, Title, Content } from 'components';
+import { Container, ErrorMessage, Group, Head, Markdown, Page, PageHeading, Splash, withAPI, Heading, Content } from 'components';
 import { getLocaleData } from 'client-api';
 import SplashContext from 'components/splash/splashContext';
 
@@ -10,7 +10,7 @@ const LazyLoadExample = withAPI({
     <>
       {response.content.map(({ title, body }) => (
         <div key={title}>
-          <Title>{title}</Title>
+          <Heading>{title}</Heading>
           <Content>{body}</Content>
         </div>
       ))}
@@ -26,7 +26,7 @@ const HomePage = ({ response }) => {
       <Page id="Home">
         <Head/>
         <Splash>
-          <PageTitle
+          <PageHeading
             title={locale.title}
             subtitle={locale.subtitle}
           />

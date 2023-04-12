@@ -7,7 +7,7 @@ const schemaMap = {
 };
 
 // getModels(connection)
-export default connection => Object.entries(schemaMap).reduce((models, [name, Schema]) => {
+export default (connection) => Object.entries(schemaMap).reduce((models, [name, Schema]) => {
   models[name] = connection.model(name, Schema);
   return models;
 }, {});
