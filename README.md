@@ -4,15 +4,12 @@ This project is intended to be customized and reused as a ready-made website tem
 
 Each folder contains a `README.md` file which should be reviewed before contributing, and which contains standards we should be reviewing against when approving or denying pull requests.
 
-This project uses [jsdoc](https://jsdoc.app/) comments for documentation, and potentially for TypeScript type checking without the full commitment to the TypeScript syntax.  These comments also assist with intellisense and more useful hints.
-
-NOTE: Moving to TypeScript is currently in consideration.
-
 ---
 
 ## TECH STACK
 
 - [Docker](https://www.docker.com) to maintain consistency with all environments
+- [TypeScript](https://www.typescriptlang.org/) to provide better tooling and avoid common errors
 - [Next.js](https://nextjs.org/) (React.js + Node.js)
 - [Jest](https://jestjs.io/)
 - [ESLint](https://eslint.org/) based on [StandardJS](https://standardjs.com/) rules with some customizations
